@@ -4,7 +4,7 @@ TypeAid revolutionizes typing for individuals who face challenges with tradition
 
 ## Important Links
 
-| [Timesheet]([Group 12 Timesheet.xlsx]) | [Slack channel]([https://sfucmpt340spring2024.slack.com/canvas/C06DYV2093M]) | [Project report]([https://www.overleaf.com/project/65a57e44b93abb9b5d34e3cc]) |
+| [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/hamarneh_sfu_ca/EdXmT3EDjcBEvJTaUMvAC-UB8svaVSuxkiQCcB5B_pV3Zw?e=NVgt7v) | [Slack channel](https://sfucmpt340spring2024.slack.com/canvas/C06DYV2093M) | [Project report](https://www.overleaf.com/project/65a57e44b93abb9b5d34e3cc) |
 |-----------|---------------|-------------------------|
 
 
