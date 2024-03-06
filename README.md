@@ -1,8 +1,6 @@
-# SFU CMPT 340 Project Template -- Replace with project title
-This repository is a template for your CMPT 340 course project.
-Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
+# TypeAid -- The Intelligent Assistive Typing Platform
 
-Add a 1-2 line summary of your project here.
+TypeAid revolutionizes typing for individuals who face challenges with traditional keyboards. Our assistive typing platform and text editor provide a seamless and effortless typing experience, empowering users with accessibility needs to effortlessly express themselves.
 
 ## Important Links
 
