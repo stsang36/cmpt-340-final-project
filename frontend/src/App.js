@@ -38,7 +38,7 @@ const App = () => {
               <div class="row">
                 <div class="col-md-7 mx-auto text-center">
                   <h3 class="text-white mb-1">What are you waiting for?</h3>
-                  <p class="text-white">Experience a refined and accessible typing and word processing journey with TypeAid</p>
+                  <p class="text-white">Experience a refined and accessible typing and text editing journey with TypeAid</p>
                   <a href="#" class="btn btn-primary btn-lg mb-3 mb-sm-0">Join NOW</a>  
                 </div>
               </div>
