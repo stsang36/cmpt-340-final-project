@@ -1,76 +1,103 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authtoken.models import Token
+from backend.application.serializers import UserSerializer
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 
 
 '''
 @route:  POST login/
-@desc:   login user
-@body:   obj w/ username and password
+@desc:   Login user
+@body:   Object with username and password
 @access: PUBLIC
 '''
 @csrf_exempt
 @require_POST
 def login_views(request):
-    
-    if request.user.is_authenticated:
-        return HttpResponse('Already logged in', status=400)
 
-    [username, password] = request.POST['username'], request.POST['password']
-
-    if (username == None or password == None):
-        return HttpResponse('Username and Password Empty', status=400)
+    # Ensure correct method was called - POST
+    if request.method != 'POST':
+        return Response({"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
     
+    # Retrieve username and password from http request
+    username = request.data['username']
+    password = request.data['password']
+
+    # Check that username and password were provided
+    if not username or not password:
+        return Response({"detail": "Both username and password are required"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Authenticate user
     user = authenticate(username=username, password=password)
+    if not user:
+        return Response({"detail": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+    # Create a token for authentication process
+    token, created = Token.objects.get_or_create(user=user)
+    
+    # Serialize the user's data to pass it back with auth token to front end
+    serializer = UserSerializer(instance=user)
 
-    if user is not None:
-        login(request, user)
-        return HttpResponse('Logged in', status=200)
-    else:
-        return HttpResponse('Invalid username or password', status=400)
+    # Upon successful authentication and token creation - send the front end the token and user data
+    return Response({"token": token.key, "user": serializer.data}, status=status.HTTP_200_OK)
+
 
 '''
 @route:  POST logout/
-@desc:   logout user
-@body:   none
+@desc:   Logout user
+@body:   Empty
 @access: PRIVATE
 '''
 @csrf_exempt
 @require_POST
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def logout_views(request):
 
+    # Check if user is authenticated
     if request.user.is_authenticated:
-        logout(request)
-        return HttpResponse('Logged out', status=200)
+        token = Token.objects.filter(user=request.user).first()
+        if token:
+            token.delete()
+            logout(request)
+            return Response({"detail": "Logged out successfully"}, status=status.HTTP_200_OK)
+        else:
+            # Token doesn't exist for the user
+            return Response({"detail": "User is not logged in"}, status = status.HTTP_401_UNAUTHORIZED)
     else:
-        return HttpResponse('Not logged in', status=400)
+        # User is not logged in
+        return Response({"detail": "User is not logged in"}, status=status.HTTP_401_UNAUTHORIZED)
     
 
 '''
 @route:  POST register/
-@desc:   register user
-@body:   obj w/ username and password
+@desc:   Register user
+@body:   Object with username and password
 @access: PUBLIC
 '''
 @csrf_exempt
 @require_POST
+@api_view(['POST'])
 def register_views(request):
-    
-    if request.user.is_authenticated:
-        return HttpResponse('Already logged in', status=400)
-    
-    [username, password] = request.POST['username'], request.POST['password']
 
-    user = User.objects.create_user(username=username, password=password)
+    serializer = UserSerializer(data=request.data)
 
-    if user is not None:
-        login(request, user)
-        return HttpResponse('Registered and Logged in', status=200)
-    else:
-        return HttpResponse('Error registering', status=400)
+    if serializer.is_valid():
+        serializer.save()
+        user = User.objects.create_user(username=request.data['username'], password=request.data['password'])
+        user.save()
+        token = Token.objects.create(user=user)
+        return Response({"token": token.key, "user": serializer.data})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 
