@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -8,7 +9,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
-from backend.application.serializers import UserSerializer
+from backend.authentication.serializers import UserSerializer
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
@@ -114,8 +115,3 @@ def test_token_views(request):
         return Response({"detail": "Token passed for user '{}'".format(request.user.username)})
     else:
         return Response({"detail": "No token passed"}, status=status.HTTP_401_UNAUTHORIZED)
-    
-
-
-
-
