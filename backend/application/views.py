@@ -98,6 +98,22 @@ def register_views(request):
         token = Token.objects.create(user=user)
         return Response({"token": token.key, "user": serializer.data})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+'''
+@route:  GET test_token/
+@desc:   Test token authentication
+@body:   Empty
+@access: PRIVATE
+'''
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def test_token_views(request):
+    if request.user.is_authenticated:
+        return Response({"detail": "Token passed for user '{}'".format(request.user.username)})
+    else:
+        return Response({"detail": "No token passed"}, status=status.HTTP_401_UNAUTHORIZED)
     
 
 
