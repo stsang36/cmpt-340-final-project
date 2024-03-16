@@ -1,0 +1,25 @@
+POST http://127.0.0.1:8000/authentication/login
+Content-Type: application/json
+
+{"username": "testperson85", "password": "Pass1234!"}
+
+###
+
+POST http://127.0.0.1:8000/authentication/logout
+Content-Type: application/json
+Authorization: Token f765cb6df09da02eeb487e580baaea26b292062a
+
+###
+
+POST http://127.0.0.1:8000/authentication/signup
+Content-Type: application/json
+
+{"username": "testperson85", "password": "Pass1234!"}
+
+###
+
+GET http://127.0.0.1:8000/authentication/test_token
+Content-Type: application/json
+Authorization: Token f765cb6df09da02eeb487e580baaea26b292062a
+
+{}

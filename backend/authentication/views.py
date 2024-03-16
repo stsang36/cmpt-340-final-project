@@ -23,7 +23,8 @@ from rest_framework.decorators import api_view
 '''
 @csrf_exempt
 @require_POST
-def login_views(request):
+@api_view(['POST'])
+def login(request):
 
     # Ensure correct method was called - POST
     if request.method != 'POST':
@@ -34,7 +35,7 @@ def login_views(request):
     password = request.data['password']
 
     # Check that username and password were provided
-    if not username or not password:
+    if not (username and password):
         return Response({"detail": "Both username and password are required"}, status=status.HTTP_400_BAD_REQUEST)
     
     # Authenticate user
@@ -56,15 +57,17 @@ def login_views(request):
 @route:  POST logout/
 @desc:   Logout user
 @body:   Empty
-@access: PRIVATE
+@access: PUBLIC
 '''
 @csrf_exempt
 @require_POST
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def logout_views(request):
+#@permission_classes([IsAuthenticated])
+def logout(request):
 
-    # Check if user is authenticated
+    if request.method != 'POST':
+        return Response({"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
     if request.user.is_authenticated:
         token = Token.objects.filter(user=request.user).first()
         if token:
@@ -72,11 +75,9 @@ def logout_views(request):
             logout(request)
             return Response({"detail": "Logged out successfully"}, status=status.HTTP_200_OK)
         else:
-            # Token doesn't exist for the user
-            return Response({"detail": "User is not logged in"}, status = status.HTTP_401_UNAUTHORIZED)
+            return Response({"detail": "User is already logged out"}, status=status.HTTP_200_OK)
     else:
-        # User is not logged in
-        return Response({"detail": "User is not logged in"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({"detail": "User is not logged in"}, status=status.HTTP_200_OK)
     
 
 '''
@@ -88,13 +89,14 @@ def logout_views(request):
 @csrf_exempt
 @require_POST
 @api_view(['POST'])
-def register_views(request):
+def signup(request):
 
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        user = User.objects.create_user(username=request.data['username'], password=request.data['password'])
+        user = User.objects.get(username=request.data['username'])
+        user.set_password(request.data['password'])
         user.save()
         token = Token.objects.create(user=user)
         return Response({"token": token.key, "user": serializer.data})
@@ -105,12 +107,12 @@ def register_views(request):
 @route:  GET test_token/
 @desc:   Test token authentication
 @body:   Empty
-@access: PRIVATE
+@access: PUBLIC
 '''
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def test_token_views(request):
+def test_token(request):
     if request.user.is_authenticated:
         return Response({"detail": "Token passed for user '{}'".format(request.user.username)})
     else:
