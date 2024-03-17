@@ -13,7 +13,7 @@ from .models import preferences
 # Create your views here.
 
 '''
-@route:  GET 
+@route:  GET api/fetchLockedKeys/
 @desc:   Fetches all the locked keys for the user
 @body:   None
 @access: Private
@@ -42,7 +42,7 @@ def fetchLockedKeys(request):
 
 
 '''
-@route:  POST 
+@route:  POST api/addLockedKey/
 @desc:   Adds a locked key for the user
 @body:   a single char in locked_key to add
 @access: Private
@@ -74,7 +74,7 @@ def addLockedKey(request):
     return Response({"detail": "Key added." }, status=status.HTTP_200_OK)
 
 '''
-@route:  POST 
+@route:  POST api/removeLockedKey/
 @desc:   Removes a locked key for the user
 @body:   a single char in locked_key to remove
 @access: Private
