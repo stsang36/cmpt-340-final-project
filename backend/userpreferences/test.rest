@@ -1,0 +1,35 @@
+POST http://127.0.0.1:8000/authentication/login
+Content-Type: application/json
+
+{"username": "testperson85", "password": "Pass1234!"}
+
+###
+
+POST http://127.0.0.1:8000/authentication/signup
+Content-Type: application/json
+
+{"username": "testperson85", "password": "Pass1234!"}
+
+###
+
+GET http://127.0.0.1:8000/api/fetchLockedKeys/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+###
+
+POST http://127.0.0.1:8000/api/addLockedKey/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"locked_key": "a"}
+
+###
+
+POST http://127.0.0.1:8000/api/removeLockedKey/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"locked_key": "a"}
+
+###
