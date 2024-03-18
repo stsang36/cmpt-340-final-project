@@ -33,3 +33,89 @@ Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
 {"locked_key": "a"}
 
 ###
+POST http://127.0.0.1:8000/api/updateContrast/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"high_contrast": "1"}
+
+###
+
+
+POST http://127.0.0.1:8000/api/updateContrast/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"high_contrast": "0"}
+
+###
+
+GET http://127.0.0.1:8000/api/fetchAllUserPreferences/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+
+###
+POST http://127.0.0.1:8000/api/updateColorBlind/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"color_blind": "1"}
+
+###
+
+###
+POST http://127.0.0.1:8000/api/updateColorBlind/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"color_blind": "0"}
+
+###
+
+GET http://127.0.0.1:8000/api/fetchFrequentWords/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+
+###
+
+POST http://127.0.0.1:8000/api/updateFrequentWords/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"frequent_words": "hello"}
+
+###
+
+POST http://127.0.0.1:8000/api/clearFrequentWords/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+###
+
+POST http://127.0.0.1:8000/api/resetAllUserPreferences/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+###
+
+GET http://127.0.0.1:8000/api/fetchShortcutKeys/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+###
+
+POST http://127.0.0.1:8000/api/updateShortcutKeys/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"shortcut_keys": ["ctrl", "shift", "a"]}
+
+###
+
+POST http://127.0.0.1:8000/api/clearShortcutKeys/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+###
