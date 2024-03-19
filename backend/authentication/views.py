@@ -75,9 +75,9 @@ def logout(request):
             logout(request)
             return Response({"detail": "Logged out successfully"}, status=status.HTTP_200_OK)
         else:
-            return Response({"detail": "User is already logged out"}, status=status.HTTP_200_OK)
+            return Response({"detail": "User is already logged out"}, status=status.HTTP_404_NOT_FOUND)
     else:
-        return Response({"detail": "User is not logged in"}, status=status.HTTP_200_OK)
+        return Response({"detail": "User is not logged in"}, status=status.HTTP_401_UNAUTHORIZED)
     
 
 '''
