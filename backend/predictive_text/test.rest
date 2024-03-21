@@ -1,0 +1,26 @@
+
+POST http://127.0.0.1:8000/api/updateFrequentWords/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"frequent_words": "hello"}
+
+###
+
+
+GET http://127.0.0.1:8000/api/fetchAutoComplete/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"unfinished_word": "he"}
+
+###
+
+GET http://127.0.0.1:8000/api/fetchNextWordPrediction/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"prefix_word": "can"}
+
+###
+
