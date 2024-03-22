@@ -1,6 +1,7 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 
@@ -45,7 +46,7 @@ const Login = () => {
               <span class="txt1 p-b-5">
                 Don't have an account?
               </span>
-              <a href="/register" class="txt2">Register</a>
+              <Link to='/register' class="txt2">Register</Link>
             </div>
           </form>
         </div>

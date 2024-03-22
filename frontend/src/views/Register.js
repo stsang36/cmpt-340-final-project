@@ -1,6 +1,7 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faUser, faLock, faRepeat } from '@fortawesome/free-solid-svg-icons';
 
@@ -54,7 +55,7 @@ const Register = () => {
               <span class="txt1 p-b-5">
                 Already have an account?
               </span>
-              <a href="#" class="txt2">Login</a>
+              <Link to='/login' class="txt2">Login</Link>
             </div>
           </form>
         </div>
