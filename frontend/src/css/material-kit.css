@@ -22723,6 +22723,18 @@ label,
   bottom: 0;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  color: white;
+  text-align: center;
+  border-top: 2px solid #000;
+  opacity: 0.9;
+}
+
 .footer .nav-link {
   color: #344767;
   font-weight: 400;
