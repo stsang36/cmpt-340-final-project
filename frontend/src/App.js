@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/material-kit.css';
+import Help from './views/Help';
 import Login from './views/Login';
 import Register from './views/Register';
 import NavBar from './components/NavBar';
@@ -58,6 +59,7 @@ const App = () => {
             </div>
           </>
         } />
+        <Route path='/help' element={<Help />} />
       </Routes>
 
       <Footer />

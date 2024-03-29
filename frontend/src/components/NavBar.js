@@ -17,7 +17,13 @@ const NavBar = () => {
                     </span>
                 </button>
                 <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-                    <ul class="navbar-nav navbar-nav-hover ms-auto">      
+                    <ul class="navbar-nav navbar-nav-hover ms-auto">
+                        <li class="nav-item ms-lg-auto">
+                            <Link to='/help' class="nav-link nav-link-icon me-2">
+                                <i class="fa fa-question-circle me-1"></i>
+                                <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Help">Help</p>
+                            </Link>
+                        </li>      
                         <li class="nav-item ms-lg-auto">
                             <a class="nav-link nav-link-icon me-2" href="https://github.com/sfu-cmpt340/TypeAid" target="_blank">
                                 <i class="fa fa-github me-1"></i>
