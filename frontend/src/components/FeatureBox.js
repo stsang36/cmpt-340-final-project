@@ -1,4 +1,4 @@
-import '../material-kit.css';
+import '../css/material-kit.css';
 
 const FeatureBox = ({ imageLink, title, description }) => {
   return (
@@ -8,7 +8,7 @@ const FeatureBox = ({ imageLink, title, description }) => {
                 <img class="w-100" src={imageLink} />
             </div>
             <h5 class="mt-3">{title}</h5>
-            <p class="text-sm font-weight-normal">{description}</p>
+            <p class="mt-2 text-sm font-weight-normal">{description}</p>
         </div>
         <hr class="vertical dark" />
     </div>
