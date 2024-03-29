@@ -28,12 +28,18 @@ def fetchLockedKeys(request):
     user = request.user
 
     #fetch the user preferences from db
-    
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if created:
-        pref.lockedKeys = ""
-        pref.save()
+        try:
+            pref.lockedKeys = ""
+            pref.save()
+        except:
+            return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+        
         return Response({"lockedKeys": ""}, status=status.HTTP_200_OK)
     
     lockedKeys = pref.lockedKeys
@@ -63,7 +69,10 @@ def addLockedKey(request):
 
     aKey = aKey.lower()
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try: 
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if aKey in pref.lockedKeys:
         return Response({"detail": "Key already exists"}, status=status.HTTP_400_BAD_REQUEST)
@@ -95,13 +104,20 @@ def removeLockedKey(request):
 
     aKey = aKey.lower()
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
     if aKey not in pref.lockedKeys:
         return Response({"detail": "Key does not exist"}, status=status.HTTP_400_BAD_REQUEST)
-
-    pref.lockedKeys.remove(aKey)
-    pref.save()
+    
+    try:
+        pref.lockedKeys.remove(aKey)
+        pref.save()
+    except:
+        return Response({"detail": "Error removing key"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Key removed." }, status=status.HTTP_200_OK)
 
@@ -119,8 +135,10 @@ def removeLockedKey(request):
 def updateContrast(request):
 
     user = request.user
-
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     selection = int(request.data['high_contrast'])
 
@@ -132,7 +150,10 @@ def updateContrast(request):
     else:
         pref.high_contrast = False
 
-    pref.save()
+    try:
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Contrast preference updated." }, status=status.HTTP_200_OK)
 
@@ -151,7 +172,11 @@ def updateColorBlind(request):
 
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
     selection = int(request.data['color_blind'])
 
@@ -163,7 +188,11 @@ def updateColorBlind(request):
     else:
         pref.color_blind = False
     
-    pref.save()
+    try:
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
     return Response({"detail": "Colorblind preference updated." }, status=status.HTTP_200_OK)
 
@@ -183,12 +212,18 @@ def fetchFrequentWords(request):
     user = request.user
 
     #fetch the user preferences from db
-    
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if created:
-        pref.frequent_used_words = ""
-        pref.save()
+
+        try:
+            pref.frequent_used_words = ""
+            pref.save()
+        except:
+            return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
         return Response({"frequentWords": ""}, status=status.HTTP_200_OK)
     
     frequentWords = pref.frequent_used_words
@@ -211,16 +246,26 @@ def updateFrequentWords(request):
     user = request.user
 
     aWord = request.data['frequent_words']
-
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if aWord not in pref.frequent_used_words:
         pref.frequent_used_words[aWord] = 1
-        pref.save()
+
+        try:
+            pref.save()
+        except:
+            return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
         return Response({"detail": "Word added." }, status=status.HTTP_200_OK)
 
     pref.frequent_used_words[aWord] += 1
-    pref.save()
+
+    try: 
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Word updated." }, status=status.HTTP_200_OK)
 
@@ -238,10 +283,17 @@ def updateFrequentWords(request):
 def clearFrequentWords(request):
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
-
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
     pref.frequent_used_words = dict()
-    pref.save()
+
+    try:
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Frequent words cleared." }, status=status.HTTP_200_OK)
 
@@ -258,7 +310,10 @@ def clearFrequentWords(request):
 def fetchAllUserPreferences(request):
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if created:
         return Response({"detail": "No preferences found for this user." }, status=status.HTTP_400_BAD_REQUEST)
@@ -286,11 +341,17 @@ def fetchAllUserPreferences(request):
 def resetAllUserPreferences(request):
     user = request.user
 
-    preferences.objects.filter(user=user).delete()
+    try:
+        preferences.objects.filter(user=user).delete()
+    except:
+        return Response({"detail": "Error resetting user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     if not preferences.objects.filter(user=user).exists():
 
-        created = preferences.objects.create(user=user)
+        try:
+            created = preferences.objects.create(user=user)
+        except:
+            return Response({"detail": "Error creating user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
         if created:
             return Response({"detail": "Preferences reset." }, status=status.HTTP_200_OK)
@@ -311,10 +372,16 @@ def resetAllUserPreferences(request):
 def updateShortcutKeys(request):
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except: 
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     pref.shortcut_keys = request.data['shortcut_keys']
-    pref.save()
+    try:
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Shortcut keys updated." }, status=status.HTTP_200_OK)
 
@@ -331,11 +398,19 @@ def updateShortcutKeys(request):
 def fetchShortcutKeys(request):
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
 
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
     if created:
-        pref.shortcut_keys = ""
-        pref.save()
+        try:
+            pref.shortcut_keys = ""
+            pref.save()
+        except:
+            return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+        
         return Response({"shortcut_keys": ""}, status=status.HTTP_200_OK)
     
 
@@ -355,10 +430,18 @@ def fetchShortcutKeys(request):
 def clearShortcutKeys(request):
     user = request.user
 
-    pref, created = preferences.objects.get_or_create(user=user)
+    try:
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
     pref.shortcut_keys = list()
-    pref.save()
+    
+    try:
+        pref.save()
+    except:
+        return Response({"detail": "Error saving user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({"detail": "Shortcut keys cleared." }, status=status.HTTP_200_OK)
 

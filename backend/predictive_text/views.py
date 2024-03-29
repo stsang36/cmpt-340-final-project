@@ -43,13 +43,19 @@ def fetchAutoComplete(request):
     user = request.user
     unfinished_word = request.data['unfinished_word']
 
-    with open(COMPLETION_DATASET_PATH, 'r') as f:
-        dict_reader = DictReader(f)
-        data = list(dict_reader)
+    try:
+        with open(COMPLETION_DATASET_PATH, 'r') as f:
+            dict_reader = DictReader(f)
+            data = list(dict_reader)
+    except:
+        return Response({"detail": "Error dataset"}, status=status.HTTP_400_BAD_REQUEST)
 
 
     #fetch frequent words from user preferences
-    pref, created = preferences.objects.get_or_create(user=user)
+    try: 
+        pref, created = preferences.objects.get_or_create(user=user)
+    except:
+        return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     frequent_words = pref.frequent_used_words
 
@@ -105,7 +111,11 @@ def fetchNextWordPrediction(request):
     if len(tuple_sentence) != 1:
         return Response({"detail": "not a single word"}, status=status.HTTP_400_BAD_REQUEST)
 
-    words = open(NEXT_WORD_DATASET_PATH).read()
+    try:
+        words = open(NEXT_WORD_DATASET_PATH).read()
+    except:
+        return Response({"detail": "Error fetching dataset"}, status=status.HTTP_400_BAD_REQUEST)
+    
     words = nltk.word_tokenize(words)
     words = [word.lower() for word in words if word.isalnum()]
     

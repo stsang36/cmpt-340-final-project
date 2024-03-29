@@ -1,0 +1,21 @@
+POST http://127.0.0.1:8000/api/saveText/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+{"text": "this is a test"}
+
+###
+
+GET http://127.0.0.1:8000/api/loadText/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+
+###
+
+POST http://127.0.0.1:8000/api/clearText/
+Content-Type: application/json
+Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
+
+
+###

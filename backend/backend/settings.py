@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'userpreferences',
     'predictive_text',
+    'textHandler',
     
 ]
 
