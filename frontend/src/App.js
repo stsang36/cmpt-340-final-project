@@ -1,11 +1,13 @@
 import React from 'react';
 import './css/material-kit.css';
+import './css/index.css';
 import Help from './views/Help';
 import Login from './views/Login';
 import Register from './views/Register';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Keyboard from './components/Keyboard';
 import FeatureBox from './components/FeatureBox';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -61,7 +63,7 @@ const App = () => {
         } />
         <Route path='/help' element={<Help />} />
       </Routes>
-
+      <Keyboard />
       <Footer />
     </Router>
   );
