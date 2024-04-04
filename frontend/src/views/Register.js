@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faUser, faLock, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import Keyboard from '../components/Keyboard';
+import Footer from '../components/Footer';
 
 const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
@@ -135,6 +136,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
         </div>
       </div>
       <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
+      <Footer />
     </div>
   );
 }

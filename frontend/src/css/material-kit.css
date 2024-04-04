@@ -22733,6 +22733,7 @@ label,
   text-align: center;
   border-top: 2px solid #000;
   opacity: 0.9;
+  z-index: 40;
 }
 
 .footer .nav-link {

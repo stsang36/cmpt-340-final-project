@@ -70,11 +70,11 @@ const App = () => {
                 </div>
               </section>
             </div>
+            <div><Footer/></div>
           </>
         } />
         <Route path='/help' element={<Help />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }

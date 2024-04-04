@@ -7,6 +7,7 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import Footer from '../components/Footer';
 
 export default function StaticFaqSection() {
   return (
@@ -76,6 +77,7 @@ export default function StaticFaqSection() {
             </MDBRow>
         </section>
         </MDBContainer>
+        <Footer/>
     </div>
   );
 }
