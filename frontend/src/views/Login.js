@@ -1,9 +1,9 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faMailBulk, faUser, faLock, faRepeat, faRemove, faExclamationCircle, faCircleExclamation, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import Keyboard from '../components/Keyboard';
 
@@ -11,6 +11,9 @@ const Login = ({ openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
+  const [errorMessage, setErrorMessage] = useState(<div></div>);
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => { // update username as the user types
     setUsername(e.target.value);
@@ -22,6 +25,16 @@ const Login = ({ openKeyboard }) => {
 
   const handleLogin = async (e) => { // on form submission handle login
     e.preventDefault();
+
+    if (username === '' || password === '') {
+      setErrorMessage(
+        <div class="invalid">
+          <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Please input all fields
+        </div>
+      );
+      return;
+    }
+
     try {
       // Call login API using POST request to backend at this endpoint: 'http://127.0.0.1:8000/authentication/login'
       const response = await fetch('http://127.0.0.1:8000/authentication/login', {
@@ -41,9 +54,15 @@ const Login = ({ openKeyboard }) => {
         console.log('Login successful');
         console.log('Token:', responseData.token);
         console.log('User data:', responseData.user);
+        navigate('/');
         // Need to store token and user id and possibly username in localstorage or cookies
       } else { // Handle failed login
         console.error('Login failed:', responseData.detail);
+        setErrorMessage(
+          <div class="invalid">
+            <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Invalid username or password
+          </div>
+        );
       }
     } catch (error) { // Handle error
       console.error('Error occurred:', error);
@@ -69,7 +88,7 @@ const Login = ({ openKeyboard }) => {
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Type your username"
-                onClick={openKeyboard}
+                // onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -83,17 +102,19 @@ const Login = ({ openKeyboard }) => {
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
-                onClick={openKeyboard}
+                // onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
             
-            <div class="text-right p-t-8 p-b-31">
+            <div class="text-right p-t-8">
               <input type="checkbox" id="remember" name="remember" />
               <label for="remember">Remember me</label>
             </div>
+
+            {errorMessage}
             
-            <div class="container-login100-form-btn">
+            <div class="container-login100-form-btn p-t-20">
               <div class="wrap-login100-form-btn">
                 <div class="login100-form-bgbtn"></div>
                 <button class="login100-form-btn">
@@ -102,7 +123,7 @@ const Login = ({ openKeyboard }) => {
               </div>
             </div>
 
-            <div class="flex-col-c p-t-50">
+            <div class="flex-col-c p-t-35">
               <span class="txt1 p-b-5">
                 Don't have an account?
               </span>
