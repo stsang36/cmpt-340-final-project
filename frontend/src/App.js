@@ -13,13 +13,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false); // state to handle if the keyboard is open or not
 
-  const openKeyboard = () => {
+  const openKeyboard = () => { // function used to open the keyboard
     setKeyboardVisible(true);
   };
 
-  const closeKeyboard = () => {
+  const closeKeyboard = () => { // function used to close the keyboard
     setKeyboardVisible(false);
   };
 
