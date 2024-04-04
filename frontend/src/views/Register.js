@@ -5,8 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faUser, faLock, faRepeat, faRemove, faExclamationCircle, faCircleExclamation, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
+import Keyboard from '../components/Keyboard';
+import Footer from '../components/Footer';
 
-const Register = ({ toggleKeyboardVisibility }) => {
+const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty
@@ -104,6 +106,7 @@ const Register = ({ toggleKeyboardVisibility }) => {
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Type your username"
+                onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -117,6 +120,7 @@ const Register = ({ toggleKeyboardVisibility }) => {
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
+                onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -130,6 +134,7 @@ const Register = ({ toggleKeyboardVisibility }) => {
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
                 placeholder="Type your password again"
+                onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faRepeat} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -154,6 +159,8 @@ const Register = ({ toggleKeyboardVisibility }) => {
           </form>
         </div>
       </div>
+      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
+      <Footer />
     </div>
   );
 }
