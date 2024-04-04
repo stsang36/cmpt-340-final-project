@@ -39,7 +39,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
         if(capsLock) {
             key = key.toUpperCase();
         }
-
+        console.log(activeField);
         if (activeField[0]) {
             handleUsernameChange(key);
         } else if (activeField[1]) {

@@ -36,7 +36,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
   const handlePasswordChange = (key) => {
     if(key === 'backspace') {
-      setUsername(prevUsername => prevUsername.slice(0, -1));
+      setPassword(prevPassword => prevPassword.slice(0, -1));
     } else {
       setPassword(prevPassword => prevPassword + key);
     }
@@ -122,7 +122,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
-                onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handlePasswordClick(); }}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
