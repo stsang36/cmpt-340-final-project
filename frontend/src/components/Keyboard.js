@@ -33,16 +33,7 @@ const Keyboard = () => {
 
     return (
         <div className="z-50 fixed bottom-0 left-0 w-full flex flex-col justify-end">
-            <button
-                className="absolute bottom-4 left-4 w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center"
-                onClick={toggleKeyboardVisibility}
-            >
-                <img
-                    className="w-8 h-8"
-                    src="../assets/images/png/Keyboard-icon.png"
-                    alt="Keyboard Icon"
-                />
-            </button>
+            
             {keyboardVisible && (
                 <div className="w-full h-[50px] flex flex-row border-t-2 border-black bg-[#2594D9] lg:h-[65px]">
                     <div className="h-full w-[21.875%] border-r-2 border-black flex flex-row items-center justify-center">
