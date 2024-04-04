@@ -1,9 +1,9 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMailBulk, faUser, faLock, faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { faMailBulk, faUser, faLock, faRepeat, faRemove, faExclamationCircle, faCircleExclamation, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import Keyboard from '../components/Keyboard';
 import Footer from '../components/Footer';
@@ -14,6 +14,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
   const [password, setPassword] = useState(''); // initalize the state for password as empty
   const [confirmPassword, setConfirmPassword] = useState(''); // initalize the state for password confirmation as empty
   const [error, setError] = useState(null); // initalize the the error as null to indicate that there is no error
+  const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
 
   const handleUsernameChange = (e) => { // update the username as the user types
     setUsername(e.target.value);
@@ -30,8 +31,21 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
   const handleRegister = async (e) => { // on form submission handle registration
     e.preventDefault();
 
+    if (username === '' || password === '' || confirmPassword === '') {
+      setErrorMessage(
+        <div class="invalid m-t-20">
+          <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Please input all fields
+        </div>
+      );
+      return;
+    }
+
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setErrorMessage(
+        <div class="invalid m-t-20">
+          <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Passwords do not match
+        </div>
+      );
       return;
     }
 
@@ -47,6 +61,11 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
       if (!response.ok) { // handle unsuccessful registration i.e. already registered
         const data = await response.json();
+        setErrorMessage(
+          <div class="invalid m-t-20">
+            <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Username already exists
+          </div>
+        );
         throw new Error(data.detail);
       }
 
@@ -56,6 +75,11 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
       console.log('Registration successful');
       console.log('Token:', data.token);
       console.log('User data:', data.user);
+      setErrorMessage(
+        <div class="valid m-t-20">
+          <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }}/> You have successfully registered
+        </div>
+      );
       // Need to store token and user id and possibly username in localstorage or cookies
 
     } catch (error) { // Handle error
@@ -105,7 +129,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
               <span class="label-input100">Confirm Password</span>
               <input
                 class="input100"
-                type="confirmpassword"
+                type="password"
                 name="pass"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
@@ -115,9 +139,9 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
               <span class="focus-input100"><FontAwesomeIcon icon={faRepeat} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
             
-            <div class="text-right p-t-8 p-b-31"></div>
+            {errorMessage}
             
-            <div class="container-login100-form-btn">
+            <div class="container-login100-form-btn p-t-20">
               <div class="wrap-login100-form-btn">
                 <div class="login100-form-bgbtn"></div>
                 <button class="login100-form-btn">
@@ -126,7 +150,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
               </div>
             </div>
 
-            <div class="flex-col-c p-t-50">
+            <div class="flex-col-c p-t-35">
               <span class="txt1 p-b-5">
                 Already have an account?
               </span>
