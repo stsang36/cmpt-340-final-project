@@ -24,40 +24,82 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
         ));
     };
 
+    // State to track whether the word predication bar is visible
+    const [wordBarVisibility, setWordBarVisibility] = useState(true);
+
+    // Function to toggle the visibility of the word predication bar
+    const toggleWordBarVisibility = () => {
+        setWordBarVisibility(!wordBarVisibility);
+    };
+
     return (
         <div className="z-50 fixed bottom-0 left-0 w-full flex flex-col justify-end">
             
             {isVisible && (
-                <div className="w-full h-[50px] flex flex-row border-t-2 border-black bg-[#2594D9] lg:h-[65px]">
-                    <div className="h-full w-[21.875%] border-r-2 border-black flex flex-row items-center justify-center">
-                        <p className="text-white lg:text-lg">Word 1</p>
+                    <div>
+                        {wordBarVisibility && (
+                            <button
+                                className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[65px]"
+                                onClick={toggleWordBarVisibility}
+                            >
+                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 1</p>
+                                </div>
+                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 2</p>
+                                </div>
+                                <div
+                                    className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
+                                >
+                                    <img
+                                        className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                        src="../assets/images/png/hide-keyboard-icon.png"
+                                        alt="shortcut icon"
+                                    />
+                                </div>
+                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 3</p>
+                                </div>
+                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 4</p>
+                                </div>
+                            </button>
+                        )}
+                        {!wordBarVisibility && (
+                            <button
+                                className="w-full h-[150px] flex flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
+                                onClick={toggleWordBarVisibility}
+                            >
+                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 1</p>
+                                </div>
+                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 2</p>
+                                </div>
+                                <div
+                                    className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
+                                >
+                                    <img
+                                        className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                        src="../assets/images/png/hide-keyboard-icon.png"
+                                        alt="shortcut icon"
+                                    />
+                                </div>
+                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 3</p>
+                                </div>
+                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">Word 4</p>
+                                </div>
+                            </button>
+                        )}
                     </div>
-                    <div className="h-full w-[21.875%] border-r-2 border-black flex flex-row items-center justify-center">
-                        <p className="text-white lg:text-lg">Word 2</p>
-                    </div>
-                    <button
-                        className="w-[12.5%] h-full rounded-md flex flex-row justify-center items-center font-bold text-black"
-                        onClick={closeKeyboard}
-                    >
-                        <img
-                            className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
-                            src="../assets/images/png/hide-keyboard-icon.png"
-                            alt="shortcut icon"
-                        />
-                    </button>
-                    <div className="h-full w-[21.875%] border-l-2 border-black flex flex-row items-center justify-center">
-                        <p className="text-white lg:text-lg">Word 3</p>
-                    </div>
-                    <div className="h-full w-[21.875%] border-l-2 border-black flex flex-row items-center justify-center">
-                        <p className="text-white lg:text-lg">Word 4</p>
-                    </div>
-                </div>
-            )}
+                )}
 
             {isVisible && (
-                <div className="w-full h-[300px] flex flex-row justify-center items-center bg-[#1B2C3E] sm:h-[350px] lg:h-[425px]">
+                <div className="w-full h-[425px] flex flex-row justify-center items-center bg-[#1B2C3E] sm:h-[525px] lg:h-[650px]">
 
-                    <div className="w-full h-full flex flex-col justify-start items-center py-3">
+                    <div className="w-full h-full flex flex-col justify-end items-center py-3">
 
                         <div className="flex flex-row justify-center">
 
@@ -81,7 +123,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(0); // Toggle desired superkey off
@@ -121,7 +163,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(1); // Toggle desired superkey off
@@ -161,7 +203,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(2); // Toggle desired superkey off
@@ -291,7 +333,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(3); // Toggle desired superkey off
@@ -328,7 +370,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(4); // Toggle desired superkey off
@@ -368,7 +410,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(5); // Toggle desired superkey off
@@ -406,7 +448,7 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[10%] min-w-[135px] mb-[32.5px] h-[40px] bg-[#19A957] text-white rounded-md lg:h-[50px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(6); // Toggle desired superkey off
