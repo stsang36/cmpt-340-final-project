@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/material-kit.css';
 import './css/index.css';
 import Help from './views/Help';
@@ -12,13 +12,24 @@ import FeatureBox from './components/FeatureBox';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
+
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  const openKeyboard = () => {
+    setKeyboardVisible(true);
+  };
+
+  const closeKeyboard = () => {
+    setKeyboardVisible(false);
+  };
+
   return (
     <Router>
       <NavBar />
 
       <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login openKeyboard={openKeyboard} />} />
+        <Route path='/register' element={<Register openKeyboard={openKeyboard} />} />
         <Route path='/' element={
           <>
             <Header />
@@ -63,7 +74,7 @@ const App = () => {
         } />
         <Route path='/help' element={<Help />} />
       </Routes>
-      <Keyboard />
+      <Keyboard isVisible={keyboardVisible} closeKeyboard={closeKeyboard} />
       <Footer />
     </Router>
   );

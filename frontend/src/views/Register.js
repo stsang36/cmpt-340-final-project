@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faUser, faLock, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 
-const Register = () => {
+const Register = ({ toggleKeyboardVisibility }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty

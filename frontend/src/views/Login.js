@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
+import Keyboard from '../components/Keyboard';
 
-const Login = () => {
+const Login = ({ openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
@@ -68,6 +69,7 @@ const Login = () => {
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Type your username"
+                onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -81,6 +83,7 @@ const Login = () => {
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
+                onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>

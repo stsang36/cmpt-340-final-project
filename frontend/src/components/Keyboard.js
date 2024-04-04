@@ -4,14 +4,14 @@ import React, { useState } from "react";
 // Word predictor container has 7% height
 // Keyboard container has 44% height
 
-const Keyboard = () => {
+const Keyboard = ({ isVisible, closeKeyboard }) => {
     // State to track whether the keyboard is visible or not
-    const [keyboardVisible, setKeyboardVisible] = useState(true);
+    //const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     // Function to toggle the visibility of the keyboard
-    const toggleKeyboardVisibility = () => {
-        setKeyboardVisible(!keyboardVisible);
-    };
+    //const toggleKeyboardVisibility = () => {
+    //    setKeyboardVisible(!keyboardVisible);
+    //};
 
     // State to track whether all the superkeys are visible or not
     const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true);
@@ -34,7 +34,7 @@ const Keyboard = () => {
     return (
         <div className="z-50 fixed bottom-0 left-0 w-full flex flex-col justify-end">
             
-            {keyboardVisible && (
+            {isVisible && (
                 <div className="w-full h-[50px] flex flex-row border-t-2 border-black bg-[#2594D9] lg:h-[65px]">
                     <div className="h-full w-[21.875%] border-r-2 border-black flex flex-row items-center justify-center">
                         <p className="text-white lg:text-lg">Word 1</p>
@@ -44,7 +44,7 @@ const Keyboard = () => {
                     </div>
                     <button
                         className="w-[12.5%] h-full rounded-md flex flex-row justify-center items-center font-bold text-black"
-                        onClick={toggleKeyboardVisibility}
+                        onClick={closeKeyboard}
                     >
                         <img
                             className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
@@ -61,7 +61,7 @@ const Keyboard = () => {
                 </div>
             )}
 
-            {keyboardVisible && (
+            {isVisible && (
                 <div className="w-full h-[300px] flex flex-row justify-center items-center bg-[#1B2C3E] sm:h-[350px] lg:h-[425px]">
 
                     <div className="w-full h-full flex flex-col justify-start items-center py-3">
@@ -572,5 +572,8 @@ const Keyboard = () => {
         </div>
     );
 }
+
+export const toggleKeyboardVisibility = Keyboard.toggleKeyboardVisibility;
+export const isKeyboardOpen = () => Keyboard.visible;
 
 export default Keyboard;
