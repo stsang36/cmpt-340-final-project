@@ -1,15 +1,14 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
+import React, { useState } from 'react';
+import Footer from '../components/Footer';
+import Keyboard from '../components/Keyboard';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMailBulk, faUser, faLock, faRepeat, faRemove, faExclamationCircle, faCircleExclamation, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
-import Keyboard from '../components/Keyboard';
-import Footer from '../components/Footer';
+import { faUser, faLock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
-
+const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLoggedIn }) => {
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
   const [errorMessage, setErrorMessage] = useState(<div></div>);
@@ -55,6 +54,8 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
         console.log('Login successful');
         console.log('Token:', responseData.token);
         console.log('User data:', responseData.user);
+        setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', 'true');
         navigate('/');
         // Need to store token and user id and possibly username in localstorage or cookies
       } else { // Handle failed login
@@ -136,7 +137,6 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
       <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
       <Footer />
     </div>
-    
   );
 }
 

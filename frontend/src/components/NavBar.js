@@ -1,14 +1,19 @@
 import '../css/material-kit.css';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const logout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn');
+  };
+
   return (
     <div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
         <nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
             <div class="container-fluid px-0">
-                <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="Type Aid - Your Typing Assistant" data-placement="bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                <Link class="navbar-brand font-weight-bolder ms-sm-3" to="/" rel="tooltip" title="Type Aid - Your Typing Assistant" data-placement="bottom" style={{ display: 'flex', alignItems: 'center' }}>
                     <img src="./assets/images/logo.png" width="20" height="25" style={{ marginRight: "8px" }} /> Type Aid
-                </a>
+                </Link>
                 <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon mt-2">
                         <span class="navbar-toggler-bar bar1"></span>
@@ -31,7 +36,8 @@ const NavBar = () => {
                             </a>
                         </li>
                         <li class="nav-item my-auto ms-3 ms-lg-0">
-                            <Link to='/login' class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Login</Link>
+                            {!isLoggedIn && <Link to='/login' class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Login</Link>}
+                            {isLoggedIn && <Link to='/' onClick={() => logout()} class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Logout</Link>}
                         </li>
                     </ul>
                 </div>

@@ -1,19 +1,18 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMailBulk, faUser, faLock, faRepeat, faRemove, faExclamationCircle, faCircleExclamation, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import Keyboard from '../components/Keyboard';
 import Footer from '../components/Footer';
+import Keyboard from '../components/Keyboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faRepeat, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty
   const [confirmPassword, setConfirmPassword] = useState(''); // initalize the state for password confirmation as empty
-  const [error, setError] = useState(null); // initalize the the error as null to indicate that there is no error
   const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
 
   const handleUsernameChange = (e) => { // update the username as the user types
@@ -37,6 +36,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
           <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Please input all fields
         </div>
       );
+
       return;
     }
 
@@ -46,6 +46,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
           <FontAwesomeIcon icon={faExclamationTriangle} style={{ marginRight: '5px' }}/> Passwords do not match
         </div>
       );
+      
       return;
     }
 
@@ -83,7 +84,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
       // Need to store token and user id and possibly username in localstorage or cookies
 
     } catch (error) { // Handle error
-      setError(error.message);
+      console.log(error.message);
     }
   };
 
@@ -106,7 +107,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Type your username"
-                onClick={openKeyboard}
+                // onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -120,7 +121,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
-                onClick={openKeyboard}
+                // onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -134,7 +135,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
                 placeholder="Type your password again"
-                onClick={openKeyboard}
+                // onClick={openKeyboard}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faRepeat} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/material-kit.css';
 import './css/index.css';
 import Help from './views/Help';
@@ -8,12 +8,12 @@ import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FeatureBox from './components/FeatureBox';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const App = () => {
-
   // Pass the state and function to the components that use the keyboard i.e. Login, Register, Text-Editor
   const [keyboardVisible, setKeyboardVisible] = useState(false); // state to handle if the keyboard is open or not
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const openKeyboard = () => { // function used to open the keyboard
     setKeyboardVisible(true);
@@ -23,13 +23,17 @@ const App = () => {
     setKeyboardVisible(false);
   };
 
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+  }, [])
+
   return (
     <><Router>
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
-        <Route path='/login' element={<Login isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} />} />
-        <Route path='/register' element={<Register isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} />} />
+        <Route path='/login' element={!isLoggedIn ? <Login isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" />} />
+        <Route path='/register' element={!isLoggedIn ? <Register isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} /> : <Navigate to="/" />} />
         <Route path='/' element={<>
           <Header />
 
