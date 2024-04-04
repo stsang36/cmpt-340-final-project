@@ -15,12 +15,30 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
 
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e) => { // update username as the user types
-    setUsername(e.target.value);
+  const [activeField, setActiveField] = useState([false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
+
+  const handleUsernameClick = () => {
+    setActiveField([true, false]);
   };
 
-  const handlePasswordChange = (e) => { // update the password as the user types
-    setPassword(e.target.value);
+  const handlePasswordClick = () => {
+    setActiveField([false, true]);
+  }
+
+  const handleUsernameChange = (key) => {
+    if(key === 'backspace') {
+      setUsername(prevUsername => prevUsername.slice(0, -1));
+    } else {
+      setUsername(prevUsername => prevUsername + key);
+    }
+  };
+
+  const handlePasswordChange = (key) => {
+    if(key === 'backspace') {
+      setPassword(prevPassword => prevPassword.slice(0, -1));
+    } else {
+      setPassword(prevPassword => prevPassword + key);
+    }
   };
 
   const handleLogin = async (e) => { // on form submission handle login
@@ -90,7 +108,8 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
                 value={username}
                 onChange={handleUsernameChange}
                 placeholder="Type your username"
-                // onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handleUsernameClick(); }}
+                readOnly
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -104,7 +123,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Type your password"
-                // onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handlePasswordClick(); }}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -134,7 +153,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
           </form>
         </div>
       </div>
-      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
+      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} activeField={activeField} />
       <Footer />
     </div>
   );
