@@ -66,32 +66,52 @@ const Keyboard = ({ isVisible, closeKeyboard }) => {
                             </button>
                         )}
                         {!wordBarVisibility && (
-                            <button
-                                className="w-full h-[150px] flex flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
-                                onClick={toggleWordBarVisibility}
+                            <div
+                                className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
                             >
-                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                    <p className="text-white lg:text-lg">Word 1</p>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 1</p>
+                                    </button>
                                 </div>
-                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                    <p className="text-white lg:text-lg">Word 2</p>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 2</p>
+                                    </button>
                                 </div>
+                                
                                 <div
-                                    className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
+                                    className="w-[12.5%] h-full flex flex-col justify-center items-center font-bold text-black py-1"
                                 >
-                                    <img
-                                        className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
-                                        src="../assets/images/png/hide-keyboard-icon.png"
-                                        alt="shortcut icon"
-                                    />
+                                    <button
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
+                                        onClick={closeKeyboard}
+                                    >
+                                        <img
+                                            className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                            src="../assets/images/png/hide-keyboard-icon.png"
+                                            alt="shortcut icon"
+                                        />
+                                    </button>
+                                    <button
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"
+                                        onClick={toggleWordBarVisibility}
+                                    >
+                                        🡫
+                                    </button>
+                                    
                                 </div>
-                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                    <p className="text-white lg:text-lg">Word 3</p>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 3</p>
+                                    </button>
                                 </div>
-                                <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                    <p className="text-white lg:text-lg">Word 4</p>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 4</p>
+                                    </button>
                                 </div>
-                            </button>
+                            </div>
                         )}
                     </div>
                 )}

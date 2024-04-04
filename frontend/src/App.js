@@ -7,12 +7,12 @@ import Register from './views/Register';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Keyboard from './components/Keyboard';
 import FeatureBox from './components/FeatureBox';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
+  // Pass the state and function to the components that use the keyboard i.e. Login, Register, Text-Editor
   const [keyboardVisible, setKeyboardVisible] = useState(false); // state to handle if the keyboard is open or not
 
   const openKeyboard = () => { // function used to open the keyboard
@@ -28,8 +28,8 @@ const App = () => {
       <NavBar />
 
       <Routes>
-        <Route path='/login' element={<Login openKeyboard={openKeyboard} />} />
-        <Route path='/register' element={<Register openKeyboard={openKeyboard} />} />
+        <Route path='/login' element={<Login isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} />} />
+        <Route path='/register' element={<Register isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} />} />
         <Route path='/' element={
           <>
             <Header />
@@ -74,7 +74,6 @@ const App = () => {
         } />
         <Route path='/help' element={<Help />} />
       </Routes>
-      <Keyboard isVisible={keyboardVisible} closeKeyboard={closeKeyboard} />
       <Footer />
     </Router>
   );

@@ -7,7 +7,7 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import Keyboard from '../components/Keyboard';
 
-const Login = ({ openKeyboard }) => {
+const Login = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
@@ -111,7 +111,9 @@ const Login = ({ openKeyboard }) => {
           </form>
         </div>
       </div>
+      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
     </div>
+    
   );
 }
 
