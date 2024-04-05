@@ -23,5 +23,6 @@ urlpatterns = [
     path('api/', include('userpreferences.urls')),
     path('api/', include('predictive_text.urls')),
     path('api/', include('textHandler.urls')),
+ 
     
 ]
