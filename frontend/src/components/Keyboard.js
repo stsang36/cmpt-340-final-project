@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // Word predictor container has 7% height
 // Keyboard container has 44% height
 
-const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswordChange, activeField }) => {
+const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg }) => {
 
     // State to track whether all the superkeys are visible or not
     const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true);
@@ -39,13 +39,24 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
         if (capsLock) {
             key = key.toUpperCase();
         }
-        if (activeField[0]) {
-            handleUsernameChange(key);
-        } else if (activeField[1]) {
-            handlePasswordChange(key);
+        if (activeFieldLogin) { // Problem here
+            if(activeFieldLogin[0]) {
+                handleUsernameChangeLogin(key);
+            } else if (activeFieldLogin[1]) {
+                handlePasswordChangeLogin(key);
+            }
+        } else if (activeFieldReg) {
+            if (activeFieldReg[0]) {
+                handleUsernameChangeReg(key);
+            } else if (activeFieldReg[1]) {
+                handlePasswordChangeReg(key);
+            } else if (activeFieldReg[2]) {
+                handleConfirmPasswordChangeReg(key);
+            }
         }
     };
 
+    /*
     const [prediction, setPrediction] = useState(null);
     const [prefixWord, setPrefixWord] = useState('');
     const [loading, setLoading] = useState(false); // temporarliy put it to true
@@ -81,6 +92,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
 
         fetchData();
     }, [prefixWord]);
+    */
 
     const handleWordClick = (word) => {
         // Handle clicked word (e.g., update input field with the word)

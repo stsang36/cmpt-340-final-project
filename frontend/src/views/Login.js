@@ -15,7 +15,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
 
   const navigate = useNavigate();
 
-  const [activeField, setActiveField] = useState([false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
+  const [activeFieldLogin, setActiveField] = useState([false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
 
   const handleUsernameClick = () => {
     setActiveField([true, false]);
@@ -25,7 +25,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
     setActiveField([false, true]);
   }
 
-  const handleUsernameChange = (key) => {
+  const handleUsernameChangeLogin = (key) => {
     if(key === 'backspace') {
       setUsername(prevUsername => prevUsername.slice(0, -1));
     } else {
@@ -33,7 +33,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
     }
   };
 
-  const handlePasswordChange = (key) => {
+  const handlePasswordChangeLogin = (key) => {
     if(key === 'backspace') {
       setPassword(prevPassword => prevPassword.slice(0, -1));
     } else {
@@ -106,7 +106,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
                 type="text"
                 name="username"
                 value={username}
-                onChange={handleUsernameChange}
+                onChange={handleUsernameChangeLogin}
                 placeholder="Type your username"
                 onClick={() => { openKeyboard(); handleUsernameClick(); }}
                 readOnly
@@ -121,7 +121,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
                 type="password"
                 name="pass"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={handlePasswordChangeLogin}
                 placeholder="Type your password"
                 onClick={() => { openKeyboard(); handlePasswordClick(); }}
               />
@@ -153,7 +153,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
           </form>
         </div>
       </div>
-      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange} activeField={activeField} />
+      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} />
       <Footer />
     </div>
   );

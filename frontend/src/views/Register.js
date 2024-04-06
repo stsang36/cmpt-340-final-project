@@ -15,7 +15,21 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
   const [confirmPassword, setConfirmPassword] = useState(''); // initalize the state for password confirmation as empty
   const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
 
-  const handleUsernameChange = (key) => { // update the username as the user types
+  const [activeFieldReg, setActiveField] = useState([false, false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
+
+  const handleUsernameClick = () => {
+    setActiveField([true, false, false]);
+  };
+
+  const handlePasswordClick = () => {
+    setActiveField([false, true, false]);
+  }
+
+  const handleConfirmPasswordClick = () => {
+    setActiveField([false, false, true]);
+  }
+
+  const handleUsernameChangeReg = (key) => { // update the username as the user types
     if(key === 'backspace') {
       setUsername(prevUsername => prevUsername.slice(0, -1));
     } else {
@@ -23,7 +37,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
     }
   };
 
-  const handlePasswordChange = (key) => { // update the password as the user types
+  const handlePasswordChangeReg = (key) => { // update the password as the user types
     if(key === 'backspace') {
       setPassword(prevPassword => prevPassword.slice(0, -1));
     } else {
@@ -31,7 +45,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
     }
   };
 
-  const handleConfirmPasswordChange = (key) => { // update the password confirmation as the user types
+  const handleConfirmPasswordChangeReg = (key) => { // update the password confirmation as the user types
     if(key === 'backspace') {
       setConfirmPassword(prevConfirmPassword => prevConfirmPassword.slice(0, -1));
     } else {
@@ -117,9 +131,9 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 type="text"
                 name="username"
                 value={username}
-                onChange={handleUsernameChange}
+                onChange={handleUsernameChangeReg}
                 placeholder="Type your username"
-                // onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handleUsernameClick(); }}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faUser} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -131,9 +145,9 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 type="password"
                 name="pass"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={handlePasswordChangeReg}
                 placeholder="Type your password"
-                // onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handlePasswordClick(); }}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faLock} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -145,9 +159,9 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
                 type="password"
                 name="pass"
                 value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
+                onChange={handleConfirmPasswordChangeReg}
                 placeholder="Type your password again"
-                // onClick={openKeyboard}
+                onClick={() => { openKeyboard(); handleConfirmPasswordClick(); }}
               />
               <span class="focus-input100"><FontAwesomeIcon icon={faRepeat} style={{ width: '15px', marginTop: '45px', marginLeft: '15px' }}/></span>
             </div>
@@ -172,7 +186,8 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
           </form>
         </div>
       </div>
-      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} />
+      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} />
+
       <Footer />
     </div>
   );
