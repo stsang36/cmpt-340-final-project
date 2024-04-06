@@ -15,16 +15,28 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
   const [confirmPassword, setConfirmPassword] = useState(''); // initalize the state for password confirmation as empty
   const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
 
-  const handleUsernameChange = (e) => { // update the username as the user types
-    setUsername(e.target.value);
+  const handleUsernameChange = (key) => { // update the username as the user types
+    if(key === 'backspace') {
+      setUsername(prevUsername => prevUsername.slice(0, -1));
+    } else {
+      setUsername(prevUsername => prevUsername + key);
+    }
   };
 
-  const handlePasswordChange = (e) => { // update the password as the user types
-    setPassword(e.target.value);
+  const handlePasswordChange = (key) => { // update the password as the user types
+    if(key === 'backspace') {
+      setPassword(prevPassword => prevPassword.slice(0, -1));
+    } else {
+      setPassword(prevPassword => prevPassword + key);
+    }
   };
 
-  const handleConfirmPasswordChange = (e) => { // update the password confirmation as the user types
-    setConfirmPassword(e.target.value);
+  const handleConfirmPasswordChange = (key) => { // update the password confirmation as the user types
+    if(key === 'backspace') {
+      setConfirmPassword(prevConfirmPassword => prevConfirmPassword.slice(0, -1));
+    } else {
+      setConfirmPassword(prevConfirmPassword => prevConfirmPassword + key);
+    }
   };
 
   const handleRegister = async (e) => { // on form submission handle registration

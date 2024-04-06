@@ -39,7 +39,6 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
         if (capsLock) {
             key = key.toUpperCase();
         }
-        console.log(activeField);
         if (activeField[0]) {
             handleUsernameChange(key);
         } else if (activeField[1]) {
@@ -49,7 +48,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
 
     const [prediction, setPrediction] = useState(null);
     const [prefixWord, setPrefixWord] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); // temporarliy put it to true
     const [error, setError] = useState(null);
     //link with the backend predictive_text
     useEffect(() => {
@@ -93,73 +92,83 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChange, handlePasswo
 
             {isVisible && (
                 <div>
-                    {wordBarVisibility && (
-                        <div className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[65px]">
-                            {loading ? (
-                                <p className="text-white lg:text-lg">Loading prediction...</p>
-                            ) : error ? (
-                                <p className="text-red-500 lg:text-lg">{error}</p>
-                            ) : prediction ? (
-                                <button
-                                    className="w-full h-full flex justify-center items-center"
-                                    onClick={() => handleWordClick(prediction)}
-                                >
-                                    {prediction}
-                                </button>
-                            ) : (
-                                <p className="text-white lg:text-lg">No prediction available</p>
-                            )}
+                {wordBarVisibility && (
+                    <button
+                        className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[65px]"
+                        onClick={toggleWordBarVisibility}
+                    >
+                        <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                            <p className="text-white lg:text-lg">Word 1</p>
                         </div>
-                    )}
-                    {!wordBarVisibility && (
+                        <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                            <p className="text-white lg:text-lg">Word 2</p>
+                        </div>
                         <div
-                            className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
+                            className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
                         >
-                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
-                                <button>
-                                    <p className="text-white lg:text-lg">Word 1</p>
-                                </button>
-                            </div>
-                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">Word 2</p>
-                                </button>
-                            </div>
-
-                            <div
-                                className="w-[12.5%] h-full flex flex-col justify-center items-center font-bold text-black py-1"
-                            >
-                                <button
-                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
-                                    onClick={closeKeyboard}
-                                >
-                                    <img
-                                        className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
-                                        src="../assets/images/png/hide-keyboard-icon.png"
-                                        alt="shortcut icon"
-                                    />
-                                </button>
-                                <button
-                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"
-                                    onClick={toggleWordBarVisibility}
-                                >
-                                    🡫
-                                </button>
-
-                            </div>
-                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">Word 3</p>
-                                </button>
-                            </div>
-                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">Word 4</p>
-                                </button>
-                            </div>
+                            <img
+                                className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                src="../assets/images/png/hide-keyboard-icon.png"
+                                alt="shortcut icon"
+                            />
                         </div>
-                    )}
-                </div>
+                        <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                            <p className="text-white lg:text-lg">Word 3</p>
+                        </div>
+                        <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                            <p className="text-white lg:text-lg">Word 4</p>
+                        </div>
+                    </button>
+                )}
+                {!wordBarVisibility && (
+                            <div
+                                className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
+                            >
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 1</p>
+                                    </button>
+                                </div>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 2</p>
+                                    </button>
+                                </div>
+                                
+                                <div
+                                    className="w-[12.5%] h-full flex flex-col justify-center items-center font-bold text-black py-1"
+                                >
+                                    <button
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
+                                        onClick={closeKeyboard}
+                                    >
+                                        <img
+                                            className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                            src="../assets/images/png/hide-keyboard-icon.png"
+                                            alt="shortcut icon"
+                                        />
+                                    </button>
+                                    <button
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"
+                                        onClick={toggleWordBarVisibility}
+                                    >
+                                        🡫
+                                    </button>
+                                    
+                                </div>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 3</p>
+                                    </button>
+                                </div>
+                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                    <button>
+                                        <p className="text-white lg:text-lg">Word 4</p>
+                                    </button>
+                                </div>
+                                </div>
+                        )}
+                    </div>
             )}
 
             {isVisible && (
