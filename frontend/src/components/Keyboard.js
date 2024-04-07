@@ -1,62 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-// Outer container has 51% height
-// Word predictor container has 7% height
-// Keyboard container has 44% height
 
 const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg }) => {
 
-    // State to track whether all the superkeys are visible or not
-    const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true);
+    const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible or not
+    const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible or not
+    const [wordBarVisibility, setWordBarVisibility] = useState(true); // State to track whether the word predication bar is visible
+    const [capsLock, setCapsLock] = useState(false); // State to track whether caps lock is engaged or not
 
-    // State to track whether caps lock is engaged or not
-    const [capsLock, setCapsLock] = useState(false);
 
-    // Function to toggle the visibility of all the superkeys
+    // Function to toggle the visibility of all the zoomed out superkeys
     const toggleMainSuperkeyVisibility = () => {
         setMainSuperkeyVisibility(!mainSuperkeyVisibility);
     };
 
-    // State to track whether the zoomed in individual superkeys are visible or not
-    const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]);
-
-    // Function to toggle the visibility of a specific superkey
+    // Function to toggle the visibility of each of the zoomed in individual superkeys
     const toggleZoomedSuperkeyVisibility = (keyNumber) => {
         setZoomedSuperkeyVisibility(prevVisibility => (
             prevVisibility.map((visibility, index) => index === keyNumber ? !visibility : visibility)
         ));
     };
 
-    // State to track whether the word predication bar is visible
-    const [wordBarVisibility, setWordBarVisibility] = useState(true);
-
     // Function to toggle the visibility of the word predication bar
     const toggleWordBarVisibility = () => {
         setWordBarVisibility(!wordBarVisibility);
     };
 
+    // Function to toggle the caps lock on and off
+    const toggleCapsLock = () => {
+        setCapsLock(!capsLock);
+    }
+
+    // Function to handle the clicking of any key on the keyboard
     const handleKeyClick = (key) => {
-        if (capsLock) {
-            key = key.toUpperCase();
+        if (capsLock && key != 'backspace') { // ensure that backspace does not become modifed
+            key = key.toUpperCase(); // if caps lock is engaged then the pressed key must be capitalized
         }
-        if (activeFieldLogin) { // Problem here
-            if(activeFieldLogin[0]) {
+        if (activeFieldLogin) { // If the active field is from the login component
+            if(activeFieldLogin[0]) { // If the active field is username from the login component
                 handleUsernameChangeLogin(key);
-            } else if (activeFieldLogin[1]) {
+            } else if (activeFieldLogin[1]) { // If the active field is password from the login component
                 handlePasswordChangeLogin(key);
             }
-        } else if (activeFieldReg) {
-            if (activeFieldReg[0]) {
+        } else if (activeFieldReg) { // If the active field is from the register component
+            if (activeFieldReg[0]) { // If the active field is username from the register component
                 handleUsernameChangeReg(key);
-            } else if (activeFieldReg[1]) {
+            } else if (activeFieldReg[1]) { // If the active field is password from the register component
                 handlePasswordChangeReg(key);
-            } else if (activeFieldReg[2]) {
+            } else if (activeFieldReg[2]) { // If the active field is confirm password from the register component
                 handleConfirmPasswordChangeReg(key);
             }
         }
     };
 
     /*
+    // Word Prediction
+
     const [prediction, setPrediction] = useState(null);
     const [prefixWord, setPrefixWord] = useState('');
     const [loading, setLoading] = useState(false); // temporarliy put it to true
@@ -92,12 +91,12 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
 
         fetchData();
     }, [prefixWord]);
-    */
 
     const handleWordClick = (word) => {
         // Handle clicked word (e.g., update input field with the word)
         console.log('Clicked word:', word);
     };
+    */
 
     return (
         <div className="z-50 fixed bottom-0 left-0 w-full flex flex-col justify-end">
