@@ -99,7 +99,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
     */
 
     return (
-        <div className="z-50 fixed bottom-0 left-0 w-full flex flex-col justify-end">
+        <div className="z-50  w-full flex flex-col justify-end overflow-y-auto">
 
             {isVisible && (
                 <div>
@@ -183,7 +183,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
             )}
 
             {isVisible && (
-                <div className="w-full h-[340px] flex flex-row justify-center items-center bg-[#1B2C3E] sm:h-[425px] lg:h-[500px]">
+                <div className="w-full h-[92vh] flex flex-row justify-center items-center bg-[#1B2C3E]">
 
                     <div className="w-full h-full flex flex-col justify-end items-center py-3">
 

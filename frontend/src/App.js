@@ -29,7 +29,11 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <div>
+        {!keyboardVisible && (
+          <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )}
+      </div>
 
       <Routes>
         <Route path='/login' element={!isLoggedIn ? <Login isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" />} />
