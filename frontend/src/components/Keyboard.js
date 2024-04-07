@@ -167,7 +167,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                 <div>
                 {wordBarVisibility && (
                     <button
-                        className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[79px]"
+                        className="w-full h-[65px] flex flex-row bg-[#2594D9] lg:h-[79px]"
                         onClick={toggleWordBarVisibility}
                     >
                         <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
@@ -195,21 +195,21 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                 )}
                 {!wordBarVisibility && (
                             <div
-                                className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[79px]"
+                                className="w-full h-[65px] flex border-y-2 border-black flex-row bg-[#2594D9] lg:h-[79px]"
                             >
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
+                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
                                     <button>
                                         <p className="text-white lg:text-lg">Word 1</p>
                                     </button>
                                 </div>
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
+                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
                                     <button>
                                         <p className="text-white lg:text-lg">Word 2</p>
                                     </button>
                                 </div>
                                 
                                 <div
-                                    className="w-[12.5%] h-full bg-green-300 flex flex-row justify-center items-center font-bold text-black py-1 gap-2"
+                                    className="w-[15%] h-full flex flex-row justify-center items-center font-bold text-black py-1 gap-1"
                                 >
                                     <button
                                         className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[45%] h-[90%] hover:cursor-pointer rounded-md flex justify-center items-center"
@@ -237,12 +237,12 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                     </button>
                                     
                                 </div>
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
                                     <button>
                                         <p className="text-white lg:text-lg">Word 3</p>
                                     </button>
                                 </div>
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
                                     <button>
                                         <p className="text-white lg:text-lg">Word 4</p>
                                     </button>
