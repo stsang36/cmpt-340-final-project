@@ -8,13 +8,12 @@ import Keyboard from '../components/Keyboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faRepeat, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
+const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, closeKeyboard, openKeyboard }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty
   const [confirmPassword, setConfirmPassword] = useState(''); // initalize the state for password confirmation as empty
   const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
-
   const [activeFieldReg, setActiveField] = useState([false, false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
 
   const handleUsernameClick = () => {
@@ -54,6 +53,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
   };
 
   const handleRegister = async (e) => { // on form submission handle registration
+    setIsLoggedIn(false); // Set isLoggedIn to false as default each time the form is submitted
     e.preventDefault();
 
     if (username === '' || password === '' || confirmPassword === '') {
@@ -107,6 +107,10 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
           <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }}/> You have successfully registered
         </div>
       );
+      setIsLoggedIn(true); // If the registration is successful then the user is logged in
+      setActiveField([false, false, false]);
+      setKeyboardVisible(true);
+      localStorage.setItem('token', data.token);
       // Need to store token and user id and possibly username in localstorage or cookies
 
     } catch (error) { // Handle error
@@ -116,7 +120,7 @@ const Register = ({ isVisible, closeKeyboard, openKeyboard }) => {
 
   return (
     <div>
-      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} />
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/register-bg.webp')` }}>
           <span class="mask bg-gradient-primary opacity-4"></span>

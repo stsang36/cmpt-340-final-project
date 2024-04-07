@@ -3,7 +3,7 @@ import TextEditor from "./Text-Editor";
 import FormFieldEditor from "./Form-Field-Editor";
 
 
-const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg }) => {
+const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg }) => {
 
     const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible or not
     const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible or not
@@ -66,7 +66,8 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                 handlePasswordChangeLogin(key);
                 handleChangeFormLogin(key, 1);
             }
-        } else if (activeFieldReg) { // If the active field is from the register component
+        }
+        if (activeFieldReg) { // If the active field is from the register component
             if (activeFieldReg[0]) { // If the active field is username from the register component
                 handleUsernameChangeReg(key);
                 handleChangeFormRegister(key, 0);
@@ -104,6 +105,16 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
         });
     };
 
+    const handleLogout = async (e) => {
+
+        if(isLoggedIn) {
+            setIsLoggedIn(false);
+            localStorage.removeItem('token');
+            localStorage.removeItem('isLoggedIn');
+        } else {
+
+        }
+    }
     /*
     // Word Prediction
 
@@ -202,13 +213,21 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 >
                                     <button
                                         className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
-                                        onClick={closeKeyboard}
+                                        onClick={() => {
+                                            closeKeyboard();
+                                            handleLogout();
+                                        }}
                                     >
-                                        <img
+                                        {!isLoggedIn && (
+                                            <img
                                             className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
                                             src="../assets/images/png/hide-keyboard-icon.png"
                                             alt="shortcut icon"
                                         />
+                                        )}
+                                        {isLoggedIn && (
+                                            <p className="text-white text-xs sm:text-base lg:text-lg">Logout</p>
+                                        )}
                                     </button>
                                     <button
                                         className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"

@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLoggedIn }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboard }) => {
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
   const [errorMessage, setErrorMessage] = useState(<div></div>);
@@ -73,8 +73,11 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
         console.log('Token:', responseData.token);
         console.log('User data:', responseData.user);
         setIsLoggedIn(true);
+        localStorage.setItem('token', responseData.token);
         localStorage.setItem('isLoggedIn', 'true');
-        navigate('/');
+        setActiveField([false, false]);
+        openKeyboard();
+        
         // Need to store token and user id and possibly username in localstorage or cookies
       } else { // Handle failed login
         console.error('Login failed:', responseData.detail);
@@ -91,7 +94,7 @@ const Login = ({ isVisible, closeKeyboard, openKeyboard, isLoggedIn, setIsLogged
 
   return (
     <div>
-      <Keyboard isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} />
       
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/login-bg.webp')` }}>

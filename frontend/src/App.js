@@ -36,8 +36,8 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path='/login' element={!isLoggedIn ? <Login isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" />} />
-        <Route path='/register' element={!isLoggedIn ? <Register isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} /> : <Navigate to="/" />} />
+        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard}/>} />
+        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard}/>} />
         <Route path='/' element={
           <>
             <Header />

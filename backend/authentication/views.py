@@ -62,22 +62,18 @@ def login(request):
 @csrf_exempt
 @require_POST
 @api_view(['POST'])
-#@permission_classes([IsAuthenticated])
-def logout(request):
+def logout_view(request):
 
-    if request.method != 'POST':
-        return Response({"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-    if request.user.is_authenticated:
-        token = Token.objects.filter(user=request.user).first()
-        if token:
-            token.delete()
-            logout(request)
-            return Response({"detail": "Logged out successfully"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"detail": "User is already logged out"}, status=status.HTTP_404_NOT_FOUND)
-    else:
+    if not request.user.is_authenticated:
         return Response({"detail": "User is not logged in"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    token = Token.objects.filter(user=request.user).first()
+    if token:
+        token.delete()
+        logout(request)
+        return Response({"detail": "Logged out successfully"}, status=status.HTTP_200_OK)
+    else:
+        return Response({"detail": "User is already logged out"}, status=status.HTTP_404_NOT_FOUND)
     
 
 '''
