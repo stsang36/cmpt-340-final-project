@@ -156,7 +156,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                 <div>
                 {wordBarVisibility && (
                     <button
-                        className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[65px]"
+                        className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[79px]"
                         onClick={toggleWordBarVisibility}
                     >
                         <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
@@ -184,7 +184,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                 )}
                 {!wordBarVisibility && (
                             <div
-                                className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
+                                className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[79px]"
                             >
                                 <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
                                     <button>
@@ -198,10 +198,10 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 </div>
                                 
                                 <div
-                                    className="w-[12.5%] h-full flex flex-col justify-center items-center font-bold text-black py-1"
+                                    className="w-[12.5%] h-full flex flex-row justify-center items-center font-bold text-black py-1 gap-2"
                                 >
                                     <button
-                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[45%] h-[90%] rounded-md sm:text-xl md:text-2xl lg:text-3xl flex justify-center items-center"
                                         onClick={closeKeyboard}
                                     >
                                         <img
@@ -211,7 +211,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                         />
                                     </button>
                                     <button
-                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[45%] h-[90%] rounded-md sm:text-xl md:text-2xl lg:text-3xl flex justify-center items-center"
                                         onClick={toggleWordBarVisibility}
                                     >
                                         🡫
