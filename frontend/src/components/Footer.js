@@ -35,13 +35,13 @@ const Footer = ({ setKeyColor }) => {
                 <button
                     key={color}
                     style={{
-                    backgroundColor: color,
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    margin: '5px',
-                    border: 'none',
-                    cursor: 'pointer',
+                        backgroundColor: color,
+                        width: '20px',
+                        height: '20px',
+                        borderRadius: '50%',
+                        margin: '5px',
+                        border: 'none',
+                        cursor: 'pointer',
                     }}
                     onClick={() => changeBackground(color)}
                 ></button>
