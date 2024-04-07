@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TextEditor from "./Text-Editor";
+import FormFieldEditor from "./Form-Field-Editor";
 
 
 const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg }) => {
@@ -7,7 +9,17 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
     const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible or not
     const [wordBarVisibility, setWordBarVisibility] = useState(true); // State to track whether the word predication bar is visible
     const [capsLock, setCapsLock] = useState(false); // State to track whether caps lock is engaged or not
+    const [editingFormField, setEditingFormField] = useState(false); // State to track a form field is being edited
+    const [editingTextEditor, setEditingTextEditor] = useState(false); // State to track whether the text editor is being used
+    const [loginData, setLoginData] = useState(['', '']);
+    const [regData, setRegData] = useState(['', '', '']);
 
+    if(!activeFieldLogin) {
+        activeFieldLogin = [false, false];
+    } 
+    if (!activeFieldReg) {
+        activeFieldReg = [false, false, false];
+    }
 
     // Function to toggle the visibility of all the zoomed out superkeys
     const toggleMainSuperkeyVisibility = () => {
@@ -31,6 +43,16 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
         setCapsLock(!capsLock);
     }
 
+    // Function to toggle whether a form field is being edited or not
+    const toggleEditingFormField = () => {
+        setEditingFormField(!editingFormField);
+    }
+
+    // Function to toggle whether the text editor is being used or not
+    const toggleEditingTextEditor = () => {
+        setEditingTextEditor(!editingTextEditor);
+    }
+
     // Function to handle the clicking of any key on the keyboard
     const handleKeyClick = (key) => {
         if (capsLock && key != 'backspace') { // ensure that backspace does not become modifed
@@ -39,18 +61,47 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
         if (activeFieldLogin) { // If the active field is from the login component
             if(activeFieldLogin[0]) { // If the active field is username from the login component
                 handleUsernameChangeLogin(key);
+                handleChangeFormLogin(key, 0);
             } else if (activeFieldLogin[1]) { // If the active field is password from the login component
                 handlePasswordChangeLogin(key);
+                handleChangeFormLogin(key, 1);
             }
         } else if (activeFieldReg) { // If the active field is from the register component
             if (activeFieldReg[0]) { // If the active field is username from the register component
                 handleUsernameChangeReg(key);
+                handleChangeFormRegister(key, 0);
             } else if (activeFieldReg[1]) { // If the active field is password from the register component
                 handlePasswordChangeReg(key);
+                handleChangeFormRegister(key, 1);
             } else if (activeFieldReg[2]) { // If the active field is confirm password from the register component
                 handleConfirmPasswordChangeReg(key);
+                handleChangeFormRegister(key, 2);
             }
         }
+    };
+
+    const handleChangeFormLogin = (key, index) => {
+        setLoginData(prevLoginData => {
+          if (key === 'backspace') {
+            // If backspace is pressed, remove the last character from the string at the specified index
+            return prevLoginData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+          } else {
+            // Append the typed character to the string at the specified index
+            return prevLoginData.map((item, i) => (i === index ? item + key : item));
+          }
+        });
+    };
+
+    const handleChangeFormRegister = (key, index) => {
+        setRegData(prevRegData => {
+          if (key === 'backspace') {
+            // If backspace is pressed, remove the last character from the string at the specified index
+            return prevRegData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+          } else {
+            // Append the typed character to the string at the specified index
+            return prevRegData.map((item, i) => (i === index ? item + key : item));
+          }
+        });
     };
 
     /*
@@ -186,6 +237,13 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                 <div className="w-full h-[92vh] flex flex-row justify-center items-center bg-[#1B2C3E]">
 
                     <div className="w-full h-full flex flex-col justify-end items-center py-3">
+
+                        <div className="w-full h-full">
+
+                        {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
+                            <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
+                        )}
+                        </div>
 
                         <div className="flex flex-row justify-center">
 
