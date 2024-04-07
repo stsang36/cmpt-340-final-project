@@ -1,14 +1,14 @@
 import '../css/login.css';
 import '../css/login-util.css';
 import '../css/material-kit.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
 import Keyboard from '../components/Keyboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faRepeat, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor }) => {
+const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor, editingTextEditor, setEditingTextEditor }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty
@@ -16,6 +16,8 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
   const [errorMessage, setErrorMessage] = useState(<div class="m-t-20"></div>);
   const [activeFieldReg, setActiveField] = useState([false, false, false]); // initalize state for keeping track of whether the username or password is active -- index 0 is for username and index 1 is for password
 
+  const navigate = useNavigate();
+  
   const handleUsernameClick = () => {
     setActiveField([true, false, false]);
   };
@@ -109,8 +111,11 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
       );
       setIsLoggedIn(true); // If the registration is successful then the user is logged in
       setActiveField([false, false, false]);
-      setKeyboardVisible(true);
+      setEditingTextEditor(true);
+      localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('token', data.token);
+      navigate('/user');
+      openKeyboard();
       // Need to store token and user id and possibly username in localstorage or cookies
 
     } catch (error) { // Handle error
@@ -120,7 +125,7 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} keyColor={keyColor} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} keyColor={keyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/register-bg.webp')` }}>
           <span class="mask bg-gradient-primary opacity-4"></span>

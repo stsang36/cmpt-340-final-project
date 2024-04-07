@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['src/components/Keyboard.js'],
+  content: ['src/components/Keyboard.js','src/components/Text-Editor.js'],
   theme: {
     extend: {
       boxShadow: {

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import TextEditor from "./Text-Editor";
 import FormFieldEditor from "./Form-Field-Editor";
+import { useNavigate } from 'react-router-dom';
 
 
-const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg, keyColor }) => {
+const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg, keyColor, editingTextEditor, setEditingTextEditor }) => {
 
     const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible or not
     const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible or not
     const [wordBarVisibility, setWordBarVisibility] = useState(true); // State to track whether the word predication bar is visible
     const [capsLock, setCapsLock] = useState(false); // State to track whether caps lock is engaged or not
-    const [editingFormField, setEditingFormField] = useState(false); // State to track a form field is being edited
-    const [editingTextEditor, setEditingTextEditor] = useState(false); // State to track whether the text editor is being used
     const [loginData, setLoginData] = useState(['', '']);
     const [regData, setRegData] = useState(['', '', '']);
 
@@ -20,6 +19,8 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     if (!activeFieldReg) {
         activeFieldReg = [false, false, false];
     }
+
+    const navigate = useNavigate();
 
     // Function to toggle the visibility of all the zoomed out superkeys
     const toggleMainSuperkeyVisibility = () => {
@@ -41,16 +42,6 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     // Function to toggle the caps lock on and off
     const toggleCapsLock = () => {
         setCapsLock(!capsLock);
-    }
-
-    // Function to toggle whether a form field is being edited or not
-    const toggleEditingFormField = () => {
-        setEditingFormField(!editingFormField);
-    }
-
-    // Function to toggle whether the text editor is being used or not
-    const toggleEditingTextEditor = () => {
-        setEditingTextEditor(!editingTextEditor);
     }
 
     // Function to handle the clicking of any key on the keyboard
@@ -78,6 +69,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                 handleConfirmPasswordChangeReg(key);
                 handleChangeFormRegister(key, 2);
             }
+        }
+        if (editingTextEditor) {
+
         }
     };
 
@@ -108,9 +102,11 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const handleLogout = async (e) => {
 
         if(isLoggedIn) {
+            navigate('/');
             setIsLoggedIn(false);
             localStorage.removeItem('token');
             localStorage.removeItem('isLoggedIn');
+            setEditingTextEditor(false);
         } else {
 
         }
@@ -257,7 +253,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
                     <div className="w-full h-full flex flex-col justify-end items-center py-3">
 
-                        <div className="w-full h-full">
+                        <div className="w-full h-full mb-3">
                         {isLoggedIn && (
                             <TextEditor/>
                         )}

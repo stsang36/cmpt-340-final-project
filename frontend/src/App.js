@@ -9,12 +9,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FeatureBox from './components/FeatureBox';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import User from './views/User';
 
 const App = () => {
   // Pass the state and function to the components that use the keyboard i.e. Login, Register, Text-Editor
   const [keyboardVisible, setKeyboardVisible] = useState(false); // state to handle if the keyboard is open or not
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [keyColor, setKeyColor] = useState("#E3E3E3");
+  const [editingTextEditor, setEditingTextEditor] = useState(false); // State to track whether the text editor is being used
 
   const openKeyboard = () => { // function used to open the keyboard
     setKeyboardVisible(true);
@@ -26,7 +28,17 @@ const App = () => {
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+    // Retrieve keyboard visibility state from localStorage
+    const storedKeyboardVisible = localStorage.getItem('keyboardVisible');
+    if (storedKeyboardVisible !== null) {
+      setKeyboardVisible(storedKeyboardVisible === 'true');
+    }
   }, []);
+
+  // Save keyboard visibility state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('keyboardVisible', keyboardVisible);
+  }, [keyboardVisible]);
 
   return (
     <Router>
@@ -37,8 +49,9 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor} />} />
-        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor}/>} />
+        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />} />
+        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />} />
+        <Route path='/user' element={<User isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />} />
         <Route path='/' element={
           <>
             <Header />

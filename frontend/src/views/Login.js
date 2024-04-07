@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor, editingTextEditor, setEditingTextEditor }) => {
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
   const [errorMessage, setErrorMessage] = useState(<div></div>);
@@ -76,6 +76,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
         localStorage.setItem('token', responseData.token);
         localStorage.setItem('isLoggedIn', 'true');
         setActiveField([false, false]);
+        setEditingTextEditor(true);
+        navigate('/user');
         openKeyboard();
         
         // Need to store token and user id and possibly username in localstorage or cookies
@@ -94,7 +96,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} keyColor={keyColor} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} keyColor={keyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
       
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/login-bg.webp')` }}>
