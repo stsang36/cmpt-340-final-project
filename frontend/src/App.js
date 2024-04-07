@@ -37,8 +37,8 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard}/>} />
-        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard}/>} />
+        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor} />} />
+        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={keyboardVisible} closeKeyboard={closeKeyboard} openKeyboard={openKeyboard} keyColor={keyColor} setKeyColor={setKeyColor}/>} />
         <Route path='/' element={
           <>
             <Header />

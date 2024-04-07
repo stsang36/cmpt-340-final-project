@@ -193,7 +193,7 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
               </form>
             </div>
           </div>
-        <Footer setKeyColor={setKeyColor} />
+        <Footer setKeyColor={setKeyColor} keyColor={keyColor} />
       </div>
       )}
     </div>

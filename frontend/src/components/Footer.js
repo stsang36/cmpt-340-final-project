@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faClose } from '@fortawesome/free-solid-svg-icons';
 
-const Footer = ({ setKeyColor }) => {
+const Footer = ({ setKeyColor, keyColor }) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
 
   const FloatingButton = ({ onClick }) => {  
@@ -15,7 +15,7 @@ const Footer = ({ setKeyColor }) => {
     );
   };
 
-  const Popover = ({ isVisible, onClose }) => {
+  const Popover = ({ setKeyColor, isVisible, onClose }) => {
     if (!isVisible) return null;
 
     const colors = ['#007bff', '#DC143C', '#FFD700', '#FFA500', '#32CD32'];
@@ -59,7 +59,7 @@ const Footer = ({ setKeyColor }) => {
     <footer class="footer">
         <div>
             <FloatingButton onClick={togglePopover} />
-            <Popover isVisible={isPopoverVisible} onClose={() => setIsPopoverVisible(false)} />
+            <Popover setKeyColor={setKeyColor} keyColor={keyColor} isVisible={isPopoverVisible} onClose={() => setIsPopoverVisible(false)} />
         </div>
 
         <div class="container">

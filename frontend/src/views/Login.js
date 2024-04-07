@@ -160,7 +160,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
               </form>
             </div>
           </div>
-          <Footer setKeyColor={setKeyColor} />
+          <Footer setKeyColor={setKeyColor} keyColor={keyColor} />
         </div>
         )}
       </div>

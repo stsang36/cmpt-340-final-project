@@ -209,10 +209,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 </div>
                                 
                                 <div
-                                    className="w-[12.5%] h-full flex flex-row justify-center items-center font-bold text-black py-1 gap-2"
+                                    className="w-[12.5%] h-full bg-green-300 flex flex-row justify-center items-center font-bold text-black py-1 gap-2"
                                 >
                                     <button
-                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
+                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[45%] h-[90%] hover:cursor-pointer rounded-md flex justify-center items-center"
                                         onClick={() => {
                                             closeKeyboard();
                                             handleLogout();
@@ -258,6 +258,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                     <div className="w-full h-full flex flex-col justify-end items-center py-3">
 
                         <div className="w-full h-full">
+                        {isLoggedIn && (
+                            <TextEditor/>
+                        )}
 
                         {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
                             <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
