@@ -14,6 +14,7 @@ const App = () => {
   // Pass the state and function to the components that use the keyboard i.e. Login, Register, Text-Editor
   const [keyboardVisible, setKeyboardVisible] = useState(false); // state to handle if the keyboard is open or not
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [keyColor, setKeyColor] = useState("#E3E3E3");
 
   const openKeyboard = () => { // function used to open the keyboard
     setKeyboardVisible(true);
@@ -25,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
-  }, [])
+  }, []);
 
   return (
     <Router>
@@ -41,7 +42,7 @@ const App = () => {
         <Route path='/' element={
           <>
             <Header />
-            <Footer/>
+            <Footer setKeyColor={setKeyColor} />
             <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
               <section class="pb-4" id="count-stats">
                 <div class="container">

@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboard }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor }) => {
   const [username, setUsername] = useState(''); // initalize state for username as empty
   const [password, setPassword] = useState(''); // initalize state for password as empty
   const [errorMessage, setErrorMessage] = useState(<div></div>);
@@ -94,7 +94,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} keyColor={keyColor} />
       
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/login-bg.webp')` }}>
@@ -160,7 +160,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
               </form>
             </div>
           </div>
-          <Footer />
+          <Footer setKeyColor={setKeyColor} />
         </div>
         )}
       </div>

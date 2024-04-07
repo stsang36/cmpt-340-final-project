@@ -1,0 +1,40 @@
+.settings {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    color: black;
+}
+
+.popover {
+    position: fixed;
+    bottom: 85px;
+    right: 15px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1001;
+    color: black;
+}
+
+.close {
+    width: 100%;
+    text-align: right;
+}
+
+.divider {
+    background-color: grey;
+    margin: 10px 0;
+    height: 1px;
+}
+
+.colorPicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    padding-right: 5px;
+}

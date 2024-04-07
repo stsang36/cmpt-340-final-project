@@ -8,7 +8,7 @@ import Keyboard from '../components/Keyboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faRepeat, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, closeKeyboard, openKeyboard }) => {
+const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, closeKeyboard, openKeyboard, keyColor, setKeyColor }) => {
 
   const [username, setUsername] = useState(''); // initalize the state for username as empty
   const [password, setPassword] = useState(''); // initalize the state for password as empty
@@ -120,7 +120,7 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} keyColor={keyColor} />
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/register-bg.webp')` }}>
           <span class="mask bg-gradient-primary opacity-4"></span>
@@ -193,7 +193,7 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
               </form>
             </div>
           </div>
-        <Footer />
+        <Footer setKeyColor={setKeyColor} />
       </div>
       )}
     </div>
