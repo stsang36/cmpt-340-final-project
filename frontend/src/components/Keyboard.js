@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextEditor from "./Text-Editor";
 import FormFieldEditor from "./Form-Field-Editor";
 
@@ -14,9 +14,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const [loginData, setLoginData] = useState(['', '']);
     const [regData, setRegData] = useState(['', '', '']);
 
-    if(!activeFieldLogin) {
+    if (!activeFieldLogin) {
         activeFieldLogin = [false, false];
-    } 
+    }
     if (!activeFieldReg) {
         activeFieldReg = [false, false, false];
     }
@@ -59,7 +59,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             key = key.toUpperCase(); // if caps lock is engaged then the pressed key must be capitalized
         }
         if (activeFieldLogin) { // If the active field is from the login component
-            if(activeFieldLogin[0]) { // If the active field is username from the login component
+            if (activeFieldLogin[0]) { // If the active field is username from the login component
                 handleUsernameChangeLogin(key);
                 handleChangeFormLogin(key, 0);
             } else if (activeFieldLogin[1]) { // If the active field is password from the login component
@@ -83,28 +83,34 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     const handleChangeFormLogin = (key, index) => {
         setLoginData(prevLoginData => {
-          if (key === 'backspace') {
-            // If backspace is pressed, remove the last character from the string at the specified index
-            return prevLoginData.map((item, i) => (i === index ? item.slice(0, -1) : item));
-          } else {
-            // Append the typed character to the string at the specified index
-            return prevLoginData.map((item, i) => (i === index ? item + key : item));
-          }
+            if (key === 'backspace') {
+                // If backspace is pressed, remove the last character from the string at the specified index
+                return prevLoginData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+            } else {
+                // Append the typed character to the string at the specified index
+                return prevLoginData.map((item, i) => (i === index ? item + key : item));
+            }
         });
     };
 
     const handleChangeFormRegister = (key, index) => {
         setRegData(prevRegData => {
-          if (key === 'backspace') {
-            // If backspace is pressed, remove the last character from the string at the specified index
-            return prevRegData.map((item, i) => (i === index ? item.slice(0, -1) : item));
-          } else {
-            // Append the typed character to the string at the specified index
-            return prevRegData.map((item, i) => (i === index ? item + key : item));
-          }
+            if (key === 'backspace') {
+                // If backspace is pressed, remove the last character from the string at the specified index
+                return prevRegData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+            } else {
+                // Append the typed character to the string at the specified index
+                return prevRegData.map((item, i) => (i === index ? item + key : item));
+            }
         });
     };
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> Stashed changes
     const handleLogout = async (e) => {
 
         if(isLoggedIn) {
@@ -116,6 +122,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         }
     }
     /*
+>>>>>>> 13e1101b48fe3e3df3b1c60c4d57f24b40888cc6
     // Word Prediction
 
     const [prediction, setPrediction] = useState(null);
@@ -156,15 +163,29 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     const handleWordClick = (word) => {
         // Handle clicked word (e.g., update input field with the word)
-        console.log('Clicked word:', word);
-    };
-    */
+        setPrefixWord(word);
+    }
+
 
     return (
         <div className="z-50  w-full flex flex-col justify-end overflow-y-auto">
 
             {isVisible && (
                 <div>
+<<<<<<< HEAD
+                    {wordBarVisibility && (
+                        <button
+                            className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[65px]"
+                            onClick={toggleWordBarVisibility}
+                        >
+                            {prefixWord ? (
+                                <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                    <p className="text-white lg:text-lg">{prefixWord}</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+=======
                 {wordBarVisibility && (
                     <button
                         className="w-full h-[50px] flex flex-row bg-[#2594D9] lg:h-[79px]"
@@ -199,12 +220,16 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                             >
                                 <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
                                     <button>
+>>>>>>> 13e1101b48fe3e3df3b1c60c4d57f24b40888cc6
                                         <p className="text-white lg:text-lg">Word 1</p>
-                                    </button>
-                                </div>
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
-                                    <button>
+                                    </div>
+                                    <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
                                         <p className="text-white lg:text-lg">Word 2</p>
+<<<<<<< HEAD
+                                    </div>
+                                    <div
+                                        className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
+=======
                                     </button>
                                 </div>
                                 
@@ -217,6 +242,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                             closeKeyboard();
                                             handleLogout();
                                         }}
+<<<<<<< Updated upstream
+=======
+>>>>>>> 13e1101b48fe3e3df3b1c60c4d57f24b40888cc6
+>>>>>>> Stashed changes
                                     >
                                         {!isLoggedIn && (
                                             <img
@@ -224,6 +253,13 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                             src="../assets/images/png/hide-keyboard-icon.png"
                                             alt="shortcut icon"
                                         />
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                                    </div>
+                                    <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+=======
+>>>>>>> Stashed changes
                                         )}
                                         {isLoggedIn && (
                                             <p className="text-white text-xs sm:text-base lg:text-lg">Logout</p>
@@ -239,17 +275,65 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 </div>
                                 <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
                                     <button>
+>>>>>>> 13e1101b48fe3e3df3b1c60c4d57f24b40888cc6
                                         <p className="text-white lg:text-lg">Word 3</p>
-                                    </button>
-                                </div>
-                                <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                    <button>
+                                    </div>
+                                    <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
                                         <p className="text-white lg:text-lg">Word 4</p>
-                                    </button>
-                                </div>
-                                </div>
-                        )}
-                    </div>
+                                    </div>
+                                </>
+                            )}
+                        </button>
+                    )}
+                    {!wordBarVisibility && (
+                        <div
+                            className="w-full h-[150px] flex border-y-2 border-black flex-row bg-[#2594D9] sm:h-[175px] md:h-[200px] lg:h-[250px]"
+                        >
+                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
+                                <button>
+                                    <p className="text-white lg:text-lg">Word 1</p>
+                                </button>
+                            </div>
+                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">Word 2</p>
+                                </button>
+                            </div>
+
+                            <div
+                                className="w-[12.5%] h-full flex flex-col justify-center items-center font-bold text-black py-1"
+                            >
+                                <button
+                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[90%] h-[45%] mb-3 hover:cursor-pointer rounded-md flex justify-center items-center"
+                                    onClick={closeKeyboard}
+                                >
+                                    <img
+                                        className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                        src="../assets/images/png/hide-keyboard-icon.png"
+                                        alt="shortcut icon"
+                                    />
+                                </button>
+                                <button
+                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[90%] h-[45%] rounded-md sm:text-xl md:text-2xl lg:text-3xl"
+                                    onClick={toggleWordBarVisibility}
+                                >
+                                    🡫
+                                </button>
+
+                            </div>
+                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">Word 3</p>
+                                </button>
+                            </div>
+                            <div className="h-full w-[21.875%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">Word 4</p>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             )}
 
             {isVisible && (
@@ -259,9 +343,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
                         <div className="w-full h-full">
 
-                        {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
-                            <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
-                        )}
+                            {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
+                                <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
+                            )}
                         </div>
 
                         <div className="flex flex-row justify-center">
