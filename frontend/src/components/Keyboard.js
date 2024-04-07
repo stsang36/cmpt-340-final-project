@@ -210,7 +210,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(0); // Toggle desired superkey off
@@ -222,9 +222,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-tl-md rounded-tr-md rounded-bl-md rounded-br-none sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('q')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Q</button>
-                                        <button onClick={() => handleKeyClick('w')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">W</button>
-                                        <button onClick={() => handleKeyClick('e')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">E</button>
+                                        <button onClick={() => handleKeyClick('q')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Q</button>
+                                        <button onClick={() => handleKeyClick('w')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">W</button>
+                                        <button onClick={() => handleKeyClick('e')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">E</button>
                                     </div>
                                 </div>
                             )}
@@ -250,7 +250,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(1); // Toggle desired superkey off
@@ -262,10 +262,10 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('r')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">R</button>
-                                        <button onClick={() => handleKeyClick('t')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">T</button>
-                                        <button onClick={() => handleKeyClick('y')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Y</button>
-                                        <button onClick={() => handleKeyClick('u')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">U</button>
+                                        <button onClick={() => handleKeyClick('r')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">R</button>
+                                        <button onClick={() => handleKeyClick('t')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">T</button>
+                                        <button onClick={() => handleKeyClick('y')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Y</button>
+                                        <button onClick={() => handleKeyClick('u')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">U</button>
                                     </div>
                                 </div>
                             )}
@@ -290,7 +290,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(2); // Toggle desired superkey off
@@ -302,9 +302,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-tl-md rounded-tr-md rounded-bl-none rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('i')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">I</button>
-                                        <button onClick={() => handleKeyClick('o')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">O</button>
-                                        <button onClick={() => handleKeyClick('p')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">P</button>
+                                        <button onClick={() => handleKeyClick('i')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">I</button>
+                                        <button onClick={() => handleKeyClick('o')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">O</button>
+                                        <button onClick={() => handleKeyClick('p')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">P</button>
                                     </div>
                                 </div>
                             )}
@@ -335,9 +335,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-tl-none rounded-tr-md rounded-bl-md rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('a')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">A</button>
-                                        <button onClick={() => handleKeyClick('s')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">S</button>
-                                        <button onClick={() => handleKeyClick('d')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">D</button>
+                                        <button onClick={() => handleKeyClick('a')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">A</button>
+                                        <button onClick={() => handleKeyClick('s')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">S</button>
+                                        <button onClick={() => handleKeyClick('d')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">D</button>
                                     </div>
                                 </div>
                             )}
@@ -363,9 +363,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('f')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">F</button>
-                                        <button onClick={() => handleKeyClick('g')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">G</button>
-                                        <button onClick={() => handleKeyClick('h')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">H</button>
+                                        <button onClick={() => handleKeyClick('f')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">F</button>
+                                        <button onClick={() => handleKeyClick('g')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">G</button>
+                                        <button onClick={() => handleKeyClick('h')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">H</button>
                                     </div>
                                 </div>
                             )}
@@ -391,9 +391,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-tl-md rounded-tr-none rounded-bl-md rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('j')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">J</button>
-                                        <button onClick={() => handleKeyClick('k')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">K</button>
-                                        <button onClick={() => handleKeyClick('l')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">L</button>
+                                        <button onClick={() => handleKeyClick('j')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">J</button>
+                                        <button onClick={() => handleKeyClick('k')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">K</button>
+                                        <button onClick={() => handleKeyClick('l')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">L</button>
                                     </div>
                                 </div>
                             )}
@@ -406,7 +406,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="mr-[19px] md:mr-[28.5px] lg:mr-[47.5px]">
                                     <button
                                         type="button"
-                                        className="h-14 bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[72px] lg:h-[85px]"
+                                        className="h-14 bg-[#22D26D] hover:bg-[#2AF980] flex flex-row items-center rounded-t-md sm:h-[72px] lg:h-[85px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility();
                                             toggleZoomedSuperkeyVisibility(3);
@@ -420,7 +420,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(3); // Toggle desired superkey off
@@ -432,7 +432,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"><img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon" /></button>
+                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"><img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon" /></button>
                                     </div>
                                 </div>
                             )}
@@ -457,7 +457,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(4); // Toggle desired superkey off
@@ -469,9 +469,9 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('z')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Z</button>
-                                        <button onClick={() => handleKeyClick('x')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">X</button>
-                                        <button onClick={() => handleKeyClick('c')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">C</button>
+                                        <button onClick={() => handleKeyClick('z')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">Z</button>
+                                        <button onClick={() => handleKeyClick('x')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">X</button>
+                                        <button onClick={() => handleKeyClick('c')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">C</button>
                                     </div>
                                 </div>
                             )}
@@ -497,7 +497,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(5); // Toggle desired superkey off
@@ -509,10 +509,10 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick('v')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">V</button>
-                                        <button onClick={() => handleKeyClick('b')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">B</button>
-                                        <button onClick={() => handleKeyClick('n')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">N</button>
-                                        <button onClick={() => handleKeyClick('m')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">M</button>
+                                        <button onClick={() => handleKeyClick('v')} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">V</button>
+                                        <button onClick={() => handleKeyClick('b')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">B</button>
+                                        <button onClick={() => handleKeyClick('n')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">N</button>
+                                        <button onClick={() => handleKeyClick('m')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">M</button>
                                     </div>
                                 </div>
                             )}
@@ -535,7 +535,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 <div className="flex flex-col items-center">
                                     <button
                                         type="button"
-                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility(); // Toggle all main superkeys back on
                                             toggleZoomedSuperkeyVisibility(6); // Toggle desired superkey off
@@ -547,7 +547,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#22D26D] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"></button>
+                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#22D26D] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"></button>
                                     </div>
                                 </div>
                             )}
@@ -558,7 +558,7 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                         <div className="flex flex-row justify-center">
 
                             {mainSuperkeyVisibility && (
-                                <div className="mr-4 md:mr-6 lg:mr-[45px]">
+                                <div className="mr-4 md:mr-6 lg:mr-[43.5px]">
                                     <button
                                         type="button"
                                         className="h-14 bg-[#22D26D] flex flex-row items-center rounded-tl-none rounded-tr-md rounded-bl-md rounded-br-md sm:h-[72px] lg:h-[85px]"
@@ -572,17 +572,17 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 </div>
                             )}
                             {zoomedSuperkeyVisibility[3] && (
-                                <div className="ml-[12px] md:ml-[18px] lg:ml-[29px]">
+                                <div className="ml-[12px] md:ml-[18px] lg:ml-[29.5px]">
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-tl-none rounded-tr-md rounded-bl-md rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[57px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] sm:h-[96px] md:w-[85.5px] lg:w-[142.5px] lg:h-[112.5px]"><img className="object-cover w-[30px] h-[60px] lg:w-[37.5px] lg:h-[75px]" src="../assets/images/png/caps-shift-icon.png" alt="capslock and shift icon" /></button>
+                                        <button className="w-[57px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[85.5px] lg:w-[142.5px] lg:h-[112.5px]"><img className="object-cover w-[30px] h-[60px] lg:w-[37.5px] lg:h-[75px]" src="../assets/images/png/caps-shift-icon.png" alt="capslock and shift icon" /></button>
                                     </div>
                                 </div>
                             )}
 
                             {mainSuperkeyVisibility && (
-                                <div className="mr-9 md:mr-[48px] lg:mr-[121px]">
+                                <div className="mr-9 md:mr-[48px] lg:mr-[76px]">
                                     <button
                                         type="button"
                                         className="h-14 bg-white flex flex-row items-center rounded-b-md sm:h-[72px] lg:h-[85px]"
@@ -591,24 +591,24 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                             toggleZoomedSuperkeyVisibility(4);
                                         }}
                                     >
-                                        <div className="w-[47px] h-12 mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-16 md:w-[70.5px]">123</div>
+                                        <div className="w-[47px] h-12 mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-16 md:w-[70.5px] lg:w-[117.5px] lg:h-[75px] lg:text-xl">123</div>
                                         <div className="w-[30px] h-12 mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-16 md:w-[45px] lg:w-[75px] lg:h-[75px] lg:text-xl">.</div>
                                     </button>
                                 </div>
                             )}
                             {zoomedSuperkeyVisibility[4] && (
-                                <div className="lg:mr-[75px]">
+                                <div className="lg:mr-[5px]">
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[70.5px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[105.75px]">123</button>
-                                        <button className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">.</button>
+                                        <button className="w-[70.5px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[105.75px] lg:w-[176.25px] lg:h-[112.5px] lg:text-2xl">123</button>
+                                        <button className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl">.</button>
                                     </div>
                                 </div>
                             )}
 
                             {mainSuperkeyVisibility && (
-                                <div className="mr-[23px] md:mr-[34.5px] lg:mr-[50.5px]">
+                                <div className="mr-[23px] md:mr-[34.5px] lg:mr-[50px]">
                                     <button
                                         type="button"
                                         className="h-14 bg-white flex flex-row items-center rounded-b-md sm:h-[72px] lg:h-[85px]"
@@ -627,8 +627,8 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                     <div
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => handleKeyClick(' ')} className="w-[102px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[153px] lg:w-[255px] lg:h-[112.5px] lg:text-2xl">space</button>
-                                        <button onClick={() => handleKeyClick('backspace')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"><img className="object-cover w-[37.5px] h-[37.5px] lg:w-[60px] lg:h-[60px]" src="../assets/images/png/backspace-icon.png" alt="backspace icon" /></button>
+                                        <button onClick={() => handleKeyClick(' ')} className="w-[102px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[153px] lg:w-[255px] lg:h-[112.5px] lg:text-2xl">space</button>
+                                        <button onClick={() => handleKeyClick('backspace')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"><img className="object-cover w-[37.5px] h-[37.5px] lg:w-[60px] lg:h-[60px]" src="../assets/images/png/backspace-icon.png" alt="backspace icon" /></button>
                                     </div>
                                 </div>
                             )}
@@ -648,11 +648,11 @@ const Keyboard = ({ isVisible, closeKeyboard, handleUsernameChangeLogin, handleP
                                 </div>
                             )}
                             {zoomedSuperkeyVisibility[6] && ( // IMPLEMENT RETURN ON BUTTON CLICK
-                                <div className="mr-[27px] md:mr-[42px] lg:mr-[67px]">
+                                <div className="mr-[27px] md:mr-[42px] lg:mr-[67.5px]">
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-tl-md rounded-tr-none rounded-bl-md rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[72px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#22D26D] sm:h-[96px] md:w-[108px] lg:w-[180px] lg:h-[112.5px]"><img className="object-cover w-[60px] h-[60px] lg:w-[82.5px] lg:h-[82.5px]" src="../assets/images/png/return-icon.png" alt="return icon" /></button>
+                                        <button className="w-[72px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#22D26D] hover:bg-[#2AF980] sm:h-[96px] md:w-[108px] lg:w-[180px] lg:h-[112.5px]"><img className="object-cover w-[60px] h-[60px] lg:w-[82.5px] lg:h-[82.5px]" src="../assets/images/png/return-icon.png" alt="return icon" /></button>
                                     </div>
                                 </div>
                             )}
