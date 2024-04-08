@@ -58,7 +58,7 @@ repository
 
 ## 2. Installation
 
-To install, make sure to have Python, and Node JS installed onto the machine and run the following commands:
+To install, make sure to have Python, and Node JS installed onto the machine and run the following commands (Each section assumes you are in the root directory of this repository):
 
 ```bash
 git clone $THISREPO
