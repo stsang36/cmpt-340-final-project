@@ -16,7 +16,7 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 
 2. [Installation](#installation)
 
-3. [Reproducing this project](#repro)
+3. [Start Application](#repro)
 
 4. [Guidance](#guide)
 
