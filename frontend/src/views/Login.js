@@ -96,7 +96,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, openKeyboa
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} keyColor={keyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeLogin={handleUsernameChangeLogin} handlePasswordChangeLogin={handlePasswordChangeLogin} activeFieldLogin={activeFieldLogin} keyColor={keyColor} setKeyColor={setKeyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
       
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/login-bg.webp')` }}>

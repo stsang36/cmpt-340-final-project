@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import TextEditor from "./Text-Editor";
 import FormFieldEditor from "./Form-Field-Editor";
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear, faClose } from '@fortawesome/free-solid-svg-icons';
 
 
-const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg, keyColor, editingTextEditor, setEditingTextEditor }) => {
+const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg, keyColor, setKeyColor, editingTextEditor, setEditingTextEditor }) => {
 
     const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible
     const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible
@@ -37,6 +39,57 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     }
 
     const navigate = useNavigate(); // Used to navigate through the website
+
+    // Key Colour Settings
+    const [isPopoverVisible, setIsPopoverVisible] = useState(false);
+
+    const FloatingButton = ({ onClick }) => {  
+        return (
+        <button class="settings" onClick={onClick}>
+            <FontAwesomeIcon icon={faGear} style={{ color: 'white' }} />
+        </button>
+        );
+    };
+
+    const Popover = ({ setKeyColor, isVisible, onClose }) => {
+    if (!isVisible) return null;
+
+    const colors = ['#007bff', '#DC143C', '#FFD700', '#FFA500', '#32CD32'];
+
+    const changeBackground = (color) => {
+      setKeyColor(color);
+    };
+  
+    return (
+        <div class="popover">
+            <button class="close" onClick={onClose}><FontAwesomeIcon icon={faClose} /></button>
+            <hr class="divider" />
+            <div class="colorPicker">
+                <p class="label">Key Colour : </p>
+
+                {colors.map((color) => (
+                    <button
+                        key={color}
+                        style={{
+                            backgroundColor: color,
+                            width: '20px',
+                            height: '20px',
+                            borderRadius: '50%',
+                            margin: '5px',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}
+                        onClick={() => changeBackground(color)}
+                    ></button>
+                ))}
+            </div>
+        </div>
+        );
+    };
+
+    const togglePopover = () => {
+        setIsPopoverVisible(!isPopoverVisible);
+    };
 
     // Function to toggle the visibility of all the zoomed out superkeys
     const toggleMainSuperkeyVisibility = () => {
@@ -211,7 +264,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             setPredictions(['type', 'for', 'new', 'prediction']);
         }
     };
-    
+
     // Effect hook to fetch predictive text when currentWord changes
     useEffect(() => {
         fetchPredictiveText(currentWord);
@@ -240,6 +293,11 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     return (
         <div className="z-50 w-full flex flex-col justify-end overflow-y-auto">
+
+        <div>
+            <FloatingButton onClick={togglePopover} />
+            <Popover setKeyColor={setKeyColor} keyColor={keyColor} isVisible={isPopoverVisible} onClose={() => setIsPopoverVisible(false)} />
+        </div>
 
             {isVisible && (
                 <div>

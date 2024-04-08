@@ -125,7 +125,7 @@ const Register = ({ isLoggedIn, setIsLoggedIn, isVisible, setKeyboardVisible, cl
 
   return (
     <div>
-      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} keyColor={keyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
+      <Keyboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isVisible={isVisible} closeKeyboard={closeKeyboard} handleUsernameChangeReg={handleUsernameChangeReg} handlePasswordChangeReg={handlePasswordChangeReg} handleConfirmPasswordChangeReg={handleConfirmPasswordChangeReg} activeFieldReg={activeFieldReg} keyColor={keyColor} setKeyColor={setKeyColor} editingTextEditor={editingTextEditor} setEditingTextEditor={setEditingTextEditor} />
       {!isVisible && (
         <div class="limiter" style={{ backgroundImage: `url('./assets/images/register-bg.webp')` }}>
           <span class="mask bg-gradient-primary opacity-4"></span>
