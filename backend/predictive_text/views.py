@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.views.decorators.http import require_GET
 from rest_framework import status
 from rest_framework.response import Response
+'''
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
+'''
 from rest_framework.decorators import api_view
 from userpreferences.models import preferences
 from csv import DictReader
@@ -35,13 +37,16 @@ NEXT_WORD_DATASET_PATH = join(settings.BASE_DIR, 'predictive_text\datasets', 'Ne
 
 @api_view(['GET'])
 @require_GET
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+#@authentication_classes([TokenAuthentication])
+#@permission_classes([IsAuthenticated])
 
 def fetchAutoComplete(request):
 
     user = request.user
-    unfinished_word = request.data['unfinished_word']
+    unfinished_word = request.query_params.get('unfinished_word')
+    
+    if unfinished_word is None:
+        return Response({"error": "unfinished_word parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         with open(COMPLETION_DATASET_PATH, 'r') as f:
@@ -95,12 +100,12 @@ def fetchAutoComplete(request):
 
 @api_view(['GET'])
 @require_GET
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+#@authentication_classes([TokenAuthentication])
+#@permission_classes([IsAuthenticated])
 
 def fetchNextWordPrediction(request):
 
-    sentence = request.data['prefix_word']
+    sentence = request.query_params.get('prefix_word')
 
     if sentence == "" or sentence is None:
         return Response({"detail": "Empty sentence"}, status=status.HTTP_400_BAD_REQUEST)
@@ -109,7 +114,7 @@ def fetchNextWordPrediction(request):
     tuple_sentence = tuple(sentence)
 
     if len(tuple_sentence) != 1:
-        return Response({"detail": "not a single word"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detail": "Not a single word"}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         words = open(NEXT_WORD_DATASET_PATH).read()

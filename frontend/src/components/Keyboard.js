@@ -19,17 +19,19 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const [capsLockColour, setCapsLockColour] = useState('#19A957'); // State to supply the colour for the caps lock key
     const [shiftColour, setShiftColour] = useState('#19A957'); // State to supply the colour for the shift key
     const [shortcutsVisible, setShortcutsVisible] = useState(false); // State to track whether the saved shortcuts are visible
-    const [letterState, setLetterState] = useState(['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']); // State to supply the letters for the keys
-    const [shortcutData, setShortcutData] = useState(['','','','','']); // State to store the 5 shortcuts that are loaded from the backend
+    const [letterState, setLetterState] = useState(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']); // State to supply the letters for the keys
+    const [shortcutData, setShortcutData] = useState(['', '', '', '', '']); // State to store the 5 shortcuts that are loaded from the backend
+    const [currentWord, setCurrentWord] = useState('');
+    const [predictions, setPredictions] = useState(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
 
     useEffect(() => {
         //loadShortcuts(); // Load shortcuts from the backend when the component loads
     }, []);
 
     // Set unknown object's fields to false to make room for the active fields
-    if(!activeFieldLogin) { // If the activeFieldLogin object does not exist pre-set it's fields to false
+    if (!activeFieldLogin) { // If the activeFieldLogin object does not exist pre-set it's fields to false
         activeFieldLogin = [false, false];
-    } 
+    }
     if (!activeFieldReg) { // If the activeFieldReg object does not exist pre-set it's fields to false
         activeFieldReg = [false, false, false];
     }
@@ -73,14 +75,14 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     // Function to toggle the caps lock on and off
     const toggleCapsLock = () => {
         setCapsLock(!capsLock);
-        if(!capsLock) {
-            const newCapsLetters = ['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M'];
+        if (!capsLock) {
+            const newCapsLetters = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
             setLetterState(newCapsLetters);
         } else {
-            const newLowerCaseLetters = ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m'];
+            const newLowerCaseLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
             setLetterState(newLowerCaseLetters);
         }
-        if(capsLockColour === '#19A957') {
+        if (capsLockColour === '#19A957') {
             setCapsLockColour('#0F6834') // colour of the caps lock key when it is engaged
         } else {
             setCapsLockColour('#19A957'); // defalt colour of the caps lock key for when it is dis-engaged
@@ -90,7 +92,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     // Function to toggle shift on and off
     const toggleShift = () => {
         setShiftState(!shiftState);
-        if(shiftColour === '#19A957') {
+        if (shiftColour === '#19A957') {
             setShiftColour('#0F6834') // colour of the shift key when it is engaged
         } else {
             setShiftColour('#19A957'); // defalt colour of the shift key for when it is dis-engaged
@@ -110,7 +112,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             toggleShift(); // toggle shift off after capitalizing just the current key
         }
         if (activeFieldLogin) { // If the active field is from the login component
-            if(activeFieldLogin[0]) { // If the active field is username from the login component
+            if (activeFieldLogin[0]) { // If the active field is username from the login component
                 handleUsernameChangeLogin(key);
                 handleChangeFormLogin(key, 0);
             } else if (activeFieldLogin[1]) { // If the active field is password from the login component
@@ -131,7 +133,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             }
         }
         if (editingTextEditor) { // If the active field is the text editor
-            if(key === 'backspace') {
+            if (key === 'backspace') {
                 setTextData(prevTextData => prevTextData.slice(0, -1));
             } else {
                 setTextData(prevTextData => prevTextData + key);
@@ -142,33 +144,33 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     // Function for handling typing in the login form that is displayed inside the keyboard
     const handleChangeFormLogin = (key, index) => {
         setLoginData(prevLoginData => {
-          if (key === 'backspace') {
-            // If backspace is pressed, remove the last character from the string at the specified index
-            return prevLoginData.map((item, i) => (i === index ? item.slice(0, -1) : item));
-          } else {
-            // Append the typed character to the string at the specified index
-            return prevLoginData.map((item, i) => (i === index ? item + key : item));
-          }
+            if (key === 'backspace') {
+                // If backspace is pressed, remove the last character from the string at the specified index
+                return prevLoginData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+            } else {
+                // Append the typed character to the string at the specified index
+                return prevLoginData.map((item, i) => (i === index ? item + key : item));
+            }
         });
     };
 
     // Function for handling typing in the register form that is displayed inside the keyboard
     const handleChangeFormRegister = (key, index) => {
         setRegData(prevRegData => {
-          if (key === 'backspace') {
-            // If backspace is pressed, remove the last character from the string at the specified index
-            return prevRegData.map((item, i) => (i === index ? item.slice(0, -1) : item));
-          } else {
-            // Append the typed character to the string at the specified index
-            return prevRegData.map((item, i) => (i === index ? item + key : item));
-          }
+            if (key === 'backspace') {
+                // If backspace is pressed, remove the last character from the string at the specified index
+                return prevRegData.map((item, i) => (i === index ? item.slice(0, -1) : item));
+            } else {
+                // Append the typed character to the string at the specified index
+                return prevRegData.map((item, i) => (i === index ? item + key : item));
+            }
         });
     };
 
     // Function to handle logging the user out
     const handleLogout = async (e) => {
 
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             navigate('/');
             setIsLoggedIn(false);
             localStorage.removeItem('token');
@@ -179,141 +181,152 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         }
     }
 
-    /*
+
     // Word Prediction
 
-    const [prediction, setPrediction] = useState(null);
-    const [prefixWord, setPrefixWord] = useState('');
-    const [loading, setLoading] = useState(false); // temporarliy put it to true
-    const [error, setError] = useState(null);
-    //link with the backend predictive_text
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            setError(null);
-
-            try {
-                const response = await fetch('http://127.0.0.1:8000/api/fetchNextWordPrediction/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prefix_word: prefixWord }),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const responseData = await response.json();
-                setPrediction(responseData.prediction);
-            } catch (error) {
-                console.error('Error:', error);
-                setError('Failed to fetch prediction');
-            } finally {
-                setLoading(false);
+    // Fetch predictive text from the backend
+    const fetchPredictiveText = async (word) => {
+        if (!word) {
+            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+            return;
+        }
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/fetchAutoComplete?unfinished_word=${word}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            if (Array.isArray(data.top3Words)) {
+                // Padding the predictions array to ensure it always has 4 elements
+                const paddedPredictions = [...data.top3Words, 'Word 1', 'Word 2', 'Word 3', 'Word 4'].slice(0, 4);
+                setPredictions(paddedPredictions);
+            } else {
+                console.error("Expected an array for predictions but received:", data.top3Words);
+                setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
             }
-        };
-
-        fetchData();
-    }, [prefixWord]);
-
-    const handleWordClick = (word) => {
-        // Handle clicked word (e.g., update input field with the word)
-        console.log('Clicked word:', word);
+        } catch (error) {
+            console.error("Error fetching predictions:", error);
+            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+        }
     };
-    */
+
+    // Effect hook to fetch predictive text when currentWord changes
+    useEffect(() => {
+        fetchPredictiveText(currentWord);
+    }, [currentWord]);
+
+    // Enhanced handleKeyClick function to manage currentWord state
+    const handleKeyClickEnhanced = (key) => {
+        // Existing logic to handle key press
+        handleKeyClick(key); // Original function logic remains the same
+
+        // Update for predictive text logic
+        let updatedCurrentWord = currentWord;
+        if (key === 'backspace') {
+            updatedCurrentWord = currentWord.slice(0, -1);
+        } else if (key === ' ' || key === '\n') {
+            updatedCurrentWord = ''; // Reset on space or enter
+        } else if (/^[a-zA-Z]$/.test(key)) { // Only consider alphabetic characters
+            updatedCurrentWord = currentWord + key;
+        }
+        setCurrentWord(updatedCurrentWord);
+
+        // Immediately update predictions based on the updated current word
+        setPredictions(fetchPredictiveText(updatedCurrentWord));
+    };
+
+    const onPredictionSelect = (prediction) => {
+        // Use setTextData to append the prediction to the current text editor's content
+        setTextData(prevTextData => prevTextData + prediction + ' '); // Append the prediction followed by a space
+
+        setCurrentWord(''); // Reset current word after selection
+        setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']); // Optionally reset predictions or fetch new ones
+    };
 
     return (
         <div className="z-50 w-full flex flex-col justify-end overflow-y-auto">
 
             {isVisible && (
                 <div>
-                {wordBarVisibility && (
-                    <button
-                        className="w-full h-[65px] flex flex-row bg-[#2594D9] lg:h-[79px]"
-                        onClick={toggleWordBarVisibility}
-                    >
-                        <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                            <p className="text-white lg:text-lg">Word 1</p>
-                        </div>
-                        <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                            <p className="text-white lg:text-lg">Word 2</p>
-                        </div>
-                        <div
-                            className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black"
+                    {wordBarVisibility && (
+                        <button
+                            className="w-full h-[65px] flex flex-row bg-[#2594D9] lg:h-[79px]"
+                            onClick={toggleWordBarVisibility}
                         >
-                            <img
-                                className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
-                                src="../assets/images/png/hide-keyboard-icon.png"
-                                alt="shortcut icon"
-                            />
-                        </div>
-                        <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                            <p className="text-white lg:text-lg">Word 3</p>
-                        </div>
-                        <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                            <p className="text-white lg:text-lg">Word 4</p>
-                        </div>
-                    </button>
-                )}
-                {!wordBarVisibility && (
+                            <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                <p className="text-white lg:text-lg">{predictions[0] || 'NA'}</p>
+                            </div>
+                            <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                <p className="text-white lg:text-lg">{predictions[1] || 'NA'}</p>
+                            </div>
+                            <div className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black">
+                                <img
+                                    className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
+                                    src="../assets/images/png/hide-keyboard-icon.png"
+                                    alt="shortcut icon"
+                                />
+                            </div>
+                            <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                <p className="text-white lg:text-lg">{predictions[2] || 'NA'}</p>
+                            </div>
+                            <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
+                                <p className="text-white lg:text-lg">{predictions[3] || 'NA'}</p>
+                            </div>
+                        </button>
+                    )}
+                    {!wordBarVisibility && (
+                        <div
+                            className="w-full h-[65px] flex border-y-2 border-black flex-row bg-[#2594D9] lg:h-[79px]"
+                        >
+                            <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
+                                <button>
+                                    <p className="text-white lg:text-lg">{predictions[0] || 'NA'}</p>
+                                </button>
+                            </div>
+                            <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">{predictions[1] || 'NA'}</p>
+                                </button>
+                            </div>
                             <div
-                                className="w-full h-[65px] flex border-y-2 border-black flex-row bg-[#2594D9] lg:h-[79px]"
+                                className="w-[15%] h-full flex flex-row justify-center items-center font-bold text-black py-1 gap-1"
                             >
-                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
-                                    <button>
-                                        <p className="text-white lg:text-lg">Word 1</p>
-                                    </button>
-                                </div>
-                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
-                                    <button>
-                                        <p className="text-white lg:text-lg">Word 2</p>
-                                    </button>
-                                </div>
-                                
-                                <div
-                                    className="w-[15%] h-full flex flex-row justify-center items-center font-bold text-black py-1 gap-1"
+                                <button
+                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[45%] h-[90%] hover:cursor-pointer rounded-md flex justify-center items-center"
+                                    onClick={() => {
+                                        closeKeyboard();
+                                        handleLogout();
+                                    }}
                                 >
-                                    <button
-                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] w-[45%] h-[90%] hover:cursor-pointer rounded-md flex justify-center items-center"
-                                        onClick={() => {
-                                            closeKeyboard();
-                                            handleLogout();
-                                        }}
-                                    >
-                                        {!isLoggedIn && (
-                                            <img
+                                    {!isLoggedIn && (
+                                        <img
                                             className="object-cover w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] lg:w-[45px] lg:h-[45px]"
                                             src="../assets/images/png/hide-keyboard-icon.png"
                                             alt="shortcut icon"
                                         />
-                                        )}
-                                        {isLoggedIn && (
-                                            <p className="text-white text-xs sm:text-base lg:text-lg">Logout</p>
-                                        )}
-                                    </button>
-                                    <button
-                                        className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[45%] h-[90%] rounded-md sm:text-xl md:text-2xl lg:text-3xl flex justify-center items-center"
-                                        onClick={toggleWordBarVisibility}
-                                    >
-                                        🡫
-                                    </button>
-                                    
-                                </div>
-                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                    <button>
-                                        <p className="text-white lg:text-lg">Word 3</p>
-                                    </button>
-                                </div>
-                                <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                    <button>
-                                        <p className="text-white lg:text-lg">Word 4</p>
-                                    </button>
-                                </div>
-                                </div>
-                        )}
-                    </div>
+                                    )}
+                                    {isLoggedIn && (
+                                        <p className="text-white text-xs sm:text-base lg:text-lg">Logout</p>
+                                    )}
+                                </button>
+                                <button
+                                    className="bg-[#1B2C3E] hover:bg-[#6ab8e9] hover:cursor-pointer text-white w-[45%] h-[90%] rounded-md sm:text-xl md:text-2xl lg:text-3xl flex justify-center items-center"
+                                    onClick={toggleWordBarVisibility}
+                                >
+                                    🡫
+                                </button>
+                            </div>
+                            <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">{predictions[2] || 'NA'}</p>
+                                </button>
+                            </div>
+                            <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
+                                <button>
+                                    <p className="text-white lg:text-lg">{predictions[3] || 'NA'}</p>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             )}
 
             {isVisible && (
@@ -322,13 +335,13 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                     <div className="w-full h-full flex flex-col justify-end items-center py-3">
 
                         <div className="w-full h-full mb-3">
-                        {isLoggedIn && (
-                            <TextEditor textData={textData} />
-                        )}
+                            {isLoggedIn && (
+                                <TextEditor textData={textData} />
+                            )}
 
-                        {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
-                            <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
-                        )}
+                            {(activeFieldLogin[0] || activeFieldLogin[1] || activeFieldReg[0] || activeFieldReg[1] || activeFieldReg[2]) && (
+                                <FormFieldEditor activeFieldLogin={activeFieldLogin} activeFieldReg={activeFieldReg} loginData={loginData} regData={regData} />
+                            )}
                         </div>
 
                         <div className="flex flex-row justify-center">
@@ -575,14 +588,14 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button 
+                                        <button
                                             className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"
                                             onClick={() => {
                                                 toggleZoomedSuperkeyVisibility(3); // Toggle desired superkey off
                                                 toggleShortcuts();
                                             }}
                                         >
-                                            <img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon"/>
+                                            <img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon" />
                                         </button>
                                     </div>
                                 </div>
@@ -600,14 +613,14 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         Close Shortcuts
                                     </button>
 
-                                <div
-                                    className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
-                                >
-                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S1</button>
-                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S2</button>
-                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S3</button>
+                                    <div
+                                        className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
+                                    >
+                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S1</button>
+                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S2</button>
+                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S3</button>
+                                    </div>
                                 </div>
-                            </div>
                             )}
 
                             {mainSuperkeyVisibility && (
@@ -951,9 +964,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         <button onClick={() => handleKeyClick('&')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>&</button>
                                         <button onClick={() => handleKeyClick('*')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>*</button>
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(1);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(1);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             →
                                         </button>
@@ -967,18 +980,18 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(0);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(0);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             ←
                                         </button>
                                         <button onClick={() => handleKeyClick('`')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>`</button>
                                         <button onClick={() => handleKeyClick('~')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>~</button>
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(2);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(2);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             →
                                         </button>
@@ -992,18 +1005,18 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(1);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(1);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             ←
                                         </button>
                                         <button onClick={() => handleKeyClick(';')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>&</button>
                                         <button onClick={() => handleKeyClick(':')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>*</button>
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(3);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(3);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             →
                                         </button>
@@ -1017,15 +1030,15 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         className="h-[84px] bg-white flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
                                     >
                                         <button onClick={() => {
-                                                    toggleSymbolVisibility(2);
-                                                }}
-                                                className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
+                                            toggleSymbolVisibility(2);
+                                        }}
+                                            className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}
                                         >
                                             ←
                                         </button>
                                         <button onClick={() => handleKeyClick('?')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>?</button>
                                         <button onClick={() => handleKeyClick('/')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>/</button>
-                                        
+
                                     </div>
                                 </div>
                             )}
