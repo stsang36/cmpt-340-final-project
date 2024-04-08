@@ -2,11 +2,9 @@ from django.shortcuts import render
 from django.views.decorators.http import require_GET
 from rest_framework import status
 from rest_framework.response import Response
-'''
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-'''
 from rest_framework.decorators import api_view
 from userpreferences.models import preferences
 from csv import DictReader
@@ -37,8 +35,8 @@ NEXT_WORD_DATASET_PATH = join(settings.BASE_DIR, 'predictive_text\datasets', 'Ne
 
 @api_view(['GET'])
 @require_GET
-#@authentication_classes([TokenAuthentication])
-#@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 
 def fetchAutoComplete(request):
     user = request.user
@@ -85,8 +83,8 @@ def fetchAutoComplete(request):
 
 @api_view(['GET'])
 @require_GET
-#=@authentication_classes([TokenAuthentication])
-#@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 
 def fetchNextWordPrediction(request):
 

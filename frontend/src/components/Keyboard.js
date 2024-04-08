@@ -43,47 +43,47 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     // Key Colour Settings
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
 
-    const FloatingButton = ({ onClick }) => {  
+    const FloatingButton = ({ onClick }) => {
         return (
-        <button class="settings" onClick={onClick}>
-            <FontAwesomeIcon icon={faGear} style={{ color: 'white' }} />
-        </button>
+            <button class="settings" onClick={onClick}>
+                <FontAwesomeIcon icon={faGear} style={{ color: 'white' }} />
+            </button>
         );
     };
 
     const Popover = ({ setKeyColor, isVisible, onClose }) => {
-    if (!isVisible) return null;
+        if (!isVisible) return null;
 
-    const colors = ['#007bff', '#DC143C', '#FFD700', '#FFA500', '#32CD32'];
+        const colors = ['#007bff', '#DC143C', '#FFD700', '#FFA500', '#32CD32'];
 
-    const changeBackground = (color) => {
-      setKeyColor(color);
-    };
-  
-    return (
-        <div class="popover">
-            <button class="close" onClick={onClose}><FontAwesomeIcon icon={faClose} /></button>
-            <hr class="divider" />
-            <div class="colorPicker">
-                <p class="label">Key Colour : </p>
+        const changeBackground = (color) => {
+            setKeyColor(color);
+        };
 
-                {colors.map((color) => (
-                    <button
-                        key={color}
-                        style={{
-                            backgroundColor: color,
-                            width: '20px',
-                            height: '20px',
-                            borderRadius: '50%',
-                            margin: '5px',
-                            border: 'none',
-                            cursor: 'pointer',
-                        }}
-                        onClick={() => changeBackground(color)}
-                    ></button>
-                ))}
+        return (
+            <div class="popover">
+                <button class="close" onClick={onClose}><FontAwesomeIcon icon={faClose} /></button>
+                <hr class="divider" />
+                <div class="colorPicker">
+                    <p class="label">Key Colour : </p>
+
+                    {colors.map((color) => (
+                        <button
+                            key={color}
+                            style={{
+                                backgroundColor: color,
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '50%',
+                                margin: '5px',
+                                border: 'none',
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => changeBackground(color)}
+                        ></button>
+                    ))}
+                </div>
             </div>
-        </div>
         );
     };
 
@@ -238,30 +238,25 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     const fetchPredictiveText = async (word) => {
         if (!word) {
-            setPredictions(['type', 'for', 'new', 'prediction']);
+            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
             return;
         }
+        const token = localStorage.getItem('token');
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/fetchAutoComplete?unfinished_word=${word}`, {
-                method: 'GET', // or 'POST', depending on your API requirement
+                method: 'GET',
                 headers: {
+                    'Authorization': `Token ${token}`,
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include',
             });
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-            console.log('Predictive text API response:', data); // Log the response
-            if (Array.isArray(data.topWords)) {
-                const paddedPredictions = [...data.topWords, 'type', 'for', 'new', 'prediction'].slice(0, 4);
-                setPredictions(paddedPredictions);
-            } else {
-                console.error("Expected an array for predictions but received:", data.topWords);
-                setPredictions(['type', 'for', 'new', 'prediction']);
-            }
+            const paddedPredictions = [...data.topWords, 'Word 1', 'Word 2', 'Word 3', 'Word 4'].slice(0, 4);
+            setPredictions(paddedPredictions);
         } catch (error) {
             console.error("Error fetching predictions:", error.message);
-            setPredictions(['type', 'for', 'new', 'prediction']);
+            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
         }
     };
 
@@ -294,10 +289,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     return (
         <div className="z-50 w-full flex flex-col justify-end overflow-y-auto">
 
-        <div>
-            <FloatingButton onClick={togglePopover} />
-            <Popover setKeyColor={setKeyColor} keyColor={keyColor} isVisible={isPopoverVisible} onClose={() => setIsPopoverVisible(false)} />
-        </div>
+            <div>
+                <FloatingButton onClick={togglePopover} />
+                <Popover setKeyColor={setKeyColor} keyColor={keyColor} isVisible={isPopoverVisible} onClose={() => setIsPopoverVisible(false)} />
+            </div>
 
             {isVisible && (
                 <div>
@@ -335,7 +330,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 <button
                                     onClick={() => {
                                         handleKeyClickEnhanced(predictions[0]);
-                                    }} 
+                                    }}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[0]}</p>
                                 </button>
@@ -344,7 +339,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 <button
                                     onClick={() => {
                                         handleKeyClickEnhanced(predictions[1]);
-                                    }} 
+                                    }}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[1]}</p>
                                 </button>
@@ -381,7 +376,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 <button
                                     onClick={() => {
                                         handleKeyClickEnhanced(predictions[2]);
-                                    }} 
+                                    }}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[2]}</p>
                                 </button>
@@ -390,7 +385,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 <button
                                     onClick={() => {
                                         handleKeyClickEnhanced(predictions[3]);
-                                    }} 
+                                    }}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[3]}</p>
                                 </button>
@@ -1177,4 +1172,4 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 export const toggleKeyboardVisibility = Keyboard.toggleKeyboardVisibility;
 export const isKeyboardOpen = () => Keyboard.visible;
 
-export default Keyboard;
+export default Keyboard;    
