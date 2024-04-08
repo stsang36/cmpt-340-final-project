@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TextEditor = () => {
+const TextEditor = ({textData}) => {
   const [text, setText] = useState('');
 
   // Function to save text to local storage
@@ -24,7 +24,7 @@ const TextEditor = () => {
     <div className="w-full h-full flex flex-col justify-center items-center text-black">
       <p className="text-white">Text Editor</p>
       <textarea 
-        value={text} 
+        value={textData} 
         onChange={(e) => setText(e.target.value)} 
         className="w-[95%] h-[90%] p-2 resize-none border-2 border-white rounded-lg mb-3"
       />
