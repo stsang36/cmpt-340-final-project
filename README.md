@@ -69,6 +69,7 @@ Backend:
 ```bash
 cd backend
 pip3 install -r requirements.txt
+python3 manage.py migrate
 ```
 
 Frontend:
@@ -89,7 +90,6 @@ npm react-scripts start --host 0.0.0.0
 Frontend:
 ```bash
 cd backend
-python3 manage.py migrate
 python3 manage.py runserver
 ```
 
