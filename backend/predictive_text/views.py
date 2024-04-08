@@ -80,10 +80,10 @@ def fetchAutoComplete(request):
             top3_words.append(word['word'])
             counter += 1
 
-            if counter == 3:
+            if counter == 4:
                 break
     
-    return Response({"top3Words": top3_words}, status=status.HTTP_200_OK)
+    return Response({"topWords": top3_words}, status=status.HTTP_200_OK)
 
 
 '''
@@ -129,17 +129,25 @@ def fetchNextWordPrediction(request):
 
     def next_word_predictor(prefix):
 
+        top_n = 4
+
         matching_n_grams = [(ngram, freq) for ngram, freq in n_gram_freq.items() if ngram[:-1] == prefix]
         if not matching_n_grams:
             return Response({"prediction": None}, status=status.HTTP_200_OK)
         
         sorted_n_grams = sorted(matching_n_grams, key=lambda x: x[1], reverse=True)
+        prediction = []
 
-        prediction = sorted_n_grams[0][0][-1]
+        for i in range(top_n):
+            prediction.append(sorted_n_grams[i][0][-1])
+        
 
         return prediction
+    
+    final = next_word_predictor(tuple_sentence)
 
-    return Response({"prediction": next_word_predictor(tuple_sentence)}, status=status.HTTP_200_OK)
+    
+    return Response({"prediction": final}, status=status.HTTP_200_OK)
 
 
 
