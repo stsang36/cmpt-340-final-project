@@ -41,13 +41,10 @@ NEXT_WORD_DATASET_PATH = join(settings.BASE_DIR, 'predictive_text\datasets', 'Ne
 #@permission_classes([IsAuthenticated])
 
 def fetchAutoComplete(request):
-
     user = request.user
     unfinished_word = request.query_params.get('unfinished_word')
-    
     if unfinished_word is None:
         return Response({"error": "unfinished_word parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
-
     try:
         with open(COMPLETION_DATASET_PATH, 'r') as f:
             dict_reader = DictReader(f)
@@ -55,40 +52,28 @@ def fetchAutoComplete(request):
     except:
         return Response({"detail": "Error dataset"}, status=status.HTTP_400_BAD_REQUEST)
 
-
-    #fetch frequent words from user preferences
     try: 
         pref, created = preferences.objects.get_or_create(user=user)
     except:
         return Response({"detail": "Error fetching user preferences"}, status=status.HTTP_400_BAD_REQUEST)
 
     frequent_words = pref.frequent_used_words
-
     for word in data:
         word['count'] = int(word['count'])
-
-        if not created:
-            if word['word'] in frequent_words:
-                word['count'] += frequent_words[word['word']] * PERSONAL_PREDICTIVE_FACTOR
-
-        
-
-    if not created: # the dataset is already sorted, only sort if we update it.
+        if not created and word['word'] in frequent_words:
+            word['count'] += frequent_words[word['word']] * PERSONAL_PREDICTIVE_FACTOR
+    
+    if not created:
         data.sort(key=lambda x: x['count'], reverse=True)
 
-
-    top3_words = []
-
-    counter = 0
+    top_words = []
     for word in data:
         if word['word'].startswith(unfinished_word):
-            top3_words.append(word['word'])
-            counter += 1
-
-            if counter == 4:
+            top_words.append(word['word'])
+            if len(top_words) == 4:
                 break
     
-    return Response({"topWords": top3_words}, status=status.HTTP_200_OK)
+    return Response({"topWords": top_words}, status=status.HTTP_200_OK)
 
 
 '''
@@ -100,7 +85,7 @@ def fetchAutoComplete(request):
 
 @api_view(['GET'])
 @require_GET
-#@authentication_classes([TokenAuthentication])
+#=@authentication_classes([TokenAuthentication])
 #@permission_classes([IsAuthenticated])
 
 def fetchNextWordPrediction(request):
