@@ -24,7 +24,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const [letterState, setLetterState] = useState(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']); // State to supply the letters for the keys
     const [shortcutData, setShortcutData] = useState(['', '', '', '', '']); // State to store the 5 shortcuts that are loaded from the backend
     const [currentWord, setCurrentWord] = useState('');
-    const [predictions, setPredictions] = useState(['type', 'for', 'new', 'predictions']);
+    const [predictions, setPredictions] = useState(['', '', '', '']);
 
     useEffect(() => {
         //loadShortcuts(); // Load shortcuts from the backend when the component loads
@@ -242,7 +242,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     const fetchPredictiveText = async (word) => {
         if (!word) {
-            setPredictions(['type', 'for', 'new', 'predictions']);
+            setPredictions(['', '', '', '']);
             return;
         }
         const token = localStorage.getItem('token');
@@ -256,11 +256,11 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             });
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-            const paddedPredictions = [...data.topWords, 'type', 'for', 'new', 'predictions'].slice(0, 4);
+            const paddedPredictions = [...data.topWords, '', '', '', ''].slice(0, 4);
             setPredictions(paddedPredictions);
         } catch (error) {
             console.error("Error fetching predictions:", error.message);
-            setPredictions(['type', 'for', 'new', 'predictions']);
+            setPredictions(['', '', '', '']);
         }
     };
 
@@ -306,10 +306,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                             onClick={toggleWordBarVisibility}
                         >
                             <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[0] || 'NA'}</p>
+                                <p className="text-white lg:text-lg">{predictions[0] || ''}</p>
                             </div>
                             <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[1] || 'NA'}</p>
+                                <p className="text-white lg:text-lg">{predictions[1] || ''}</p>
                             </div>
                             <div className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black">
                                 <img
@@ -319,10 +319,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 />
                             </div>
                             <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[2] || 'NA'}</p>
+                                <p className="text-white lg:text-lg">{predictions[2] || ''}</p>
                             </div>
                             <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[3] || 'NA'}</p>
+                                <p className="text-white lg:text-lg">{predictions[3] || ''}</p>
                             </div>
                         </button>
                     )}
