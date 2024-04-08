@@ -7,18 +7,12 @@ TypeAid revolutionizes typing for individuals who face challenges with tradition
 | [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/hamarneh_sfu_ca/EdXmT3EDjcBEvJTaUMvAC-UB8svaVSuxkiQCcB5B_pV3Zw?e=NVgt7v) | [Slack channel](https://sfucmpt340spring2024.slack.com/canvas/C06DYV2093M) | [Project report](https://www.overleaf.com/project/65a57e44b93abb9b5d34e3cc) |
 |-----------|---------------|-------------------------|
 
-
-- Timesheet: Link your timesheet (pinned in your project's Slack channel) where you track per student the time and tasks completed/participated for this project/
-- Slack channel: Link your private Slack project channel.
-- Project report: Link your Overleaf project report document.
-
-
 ## Video/demo/GIF
 Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen recording or even using PowerPoint with audio or with text, showcasing your work.
 
 
 ## Table of Contents
-1. [Demo](#demo)
+1. [Repository](#demo)
 
 2. [Installation](#installation)
 
@@ -28,16 +22,7 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 
 
 <a name="demo"></a>
-## 1. Example demo
-
-A minimal example to showcase your work
-
-```python
-from amazing import amazingexample
-imgs = amazingexample.demo()
-for img in imgs:
-    view(img)
-```
+## 1. Repository
 
 ### What to find where
 
@@ -45,39 +30,71 @@ Explain briefly what files are found where
 
 ```bash
 repository
-├── src                          ## source code of the package itself
-├── scripts                      ## scripts, if needed
-├── docs                         ## If needed, documentation   
-├── README.md                    ## You are here
-├── requirements.yml             ## If you use conda
+├── backend
+│   ├── authentication
+│   │   └── migrations
+│   ├── backend
+│   ├── predictive_text
+│   │   ├── datasets
+│   │   └── migrations
+│   ├── textHandler
+│   │   └── migrations
+│   └── userpreferences
+│       └── migrations
+└── frontend
+    ├── public
+    │   └── assets
+    │       └── images
+    │           ├── png
+    │           ├── shapes
+    │           └── svg
+    └── src
+        ├── components
+        ├── css
+        ├── fonts
+        │   └── poppins
+        └── views
 ```
 
 <a name="installation"></a>
 
 ## 2. Installation
 
-Provide sufficient instructions to reproduce and install your project. 
-Provide _exact_ versions, test on CSIL or reference workstations.
+To install, make sure to have Python, and Node JS installed onto the machine and run the following commands:
 
 ```bash
 git clone $THISREPO
 cd $THISREPO
-conda env create -f requirements.yml
-conda activate amazing
+```
+
+Backend:
+```bash
+cd backend
+pip3 install -r requirements.txt
+```
+
+Frontend:
+```bash
+cd frontend
+npm install
 ```
 
 <a name="repro"></a>
-## 3. Reproduction
-Demonstrate how your work can be reproduced, e.g. the results in your report.
+## 3. Start Application
+To launch the application, start the backend and frontend server:
+
+Frontend:
 ```bash
-mkdir tmp && cd tmp
-wget https://yourstorageisourbusiness.com/dataset.zip
-unzip dataset.zip
-conda activate amazing
-python evaluate.py --epochs=10 --data=/in/put/dir
+cd frontend
+npm react-scripts start --host 0.0.0.0
 ```
-Data can be found at ...
-Output will be saved in ...
+Frontend:
+```bash
+cd backend
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
 
 <a name="guide"></a>
 ## 4. Guidance
