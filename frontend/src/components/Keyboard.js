@@ -22,7 +22,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const [letterState, setLetterState] = useState(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']); // State to supply the letters for the keys
     const [shortcutData, setShortcutData] = useState(['', '', '', '', '']); // State to store the 5 shortcuts that are loaded from the backend
     const [currentWord, setCurrentWord] = useState('');
-    const [predictions, setPredictions] = useState(['Word 1', 'Word 2', 'Wor 3', 'Word 4']);
+    const [predictions, setPredictions] = useState(['type', 'for', 'new', 'predictions']);
 
     useEffect(() => {
         //loadShortcuts(); // Load shortcuts from the backend when the component loads
@@ -181,12 +181,11 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         }
     }
 
-
     // Word Prediction
 
     const fetchPredictiveText = async (word) => {
         if (!word) {
-            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+            setPredictions(['type', 'for', 'new', 'prediction']);
             return;
         }
         try {
@@ -201,17 +200,18 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             const data = await response.json();
             console.log('Predictive text API response:', data); // Log the response
             if (Array.isArray(data.topWords)) {
-                const paddedPredictions = [...data.topWords, 'Word 1', 'Word 2', 'Wrd 3', 'Word 4'].slice(0, 4);
+                const paddedPredictions = [...data.topWords, 'type', 'for', 'new', 'prediction'].slice(0, 4);
                 setPredictions(paddedPredictions);
             } else {
                 console.error("Expected an array for predictions but received:", data.topWords);
-                setPredictions(['Word 1', 'Wrd 2', 'Word 3', 'Word 4']);
+                setPredictions(['type', 'for', 'new', 'prediction']);
             }
         } catch (error) {
             console.error("Error fetching predictions:", error.message);
-            setPredictions(['Wrd 1', 'Word 2', 'Word 3', 'Word 4']);
+            setPredictions(['type', 'for', 'new', 'prediction']);
         }
     };
+    
     // Effect hook to fetch predictive text when currentWord changes
     useEffect(() => {
         fetchPredictiveText(currentWord);
@@ -274,13 +274,21 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                             className="w-full h-[65px] flex border-y-2 border-black flex-row bg-[#2594D9] lg:h-[79px]"
                         >
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
-                                <button>
-                                    <p className="text-white lg:text-lg">{predictions[0] || 'NA'}</p>
+                                <button
+                                    onClick={() => {
+                                        handleKeyClickEnhanced(predictions[0]);
+                                    }} 
+                                >
+                                    <p className="text-white lg:text-lg">{predictions[0]}</p>
                                 </button>
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">{predictions[1] || 'NA'}</p>
+                                <button
+                                    onClick={() => {
+                                        handleKeyClickEnhanced(predictions[1]);
+                                    }} 
+                                >
+                                    <p className="text-white lg:text-lg">{predictions[1]}</p>
                                 </button>
                             </div>
                             <div
@@ -312,13 +320,21 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 </button>
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">{predictions[2] || 'NA'}</p>
+                                <button
+                                    onClick={() => {
+                                        handleKeyClickEnhanced(predictions[2]);
+                                    }} 
+                                >
+                                    <p className="text-white lg:text-lg">{predictions[2]}</p>
                                 </button>
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
-                                <button>
-                                    <p className="text-white lg:text-lg">{predictions[3] || 'NA'}</p>
+                                <button
+                                    onClick={() => {
+                                        handleKeyClickEnhanced(predictions[3]);
+                                    }} 
+                                >
+                                    <p className="text-white lg:text-lg">{predictions[3]}</p>
                                 </button>
                             </div>
                         </div>
