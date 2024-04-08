@@ -29,7 +29,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     useEffect(() => {
         //loadShortcuts(); // Load shortcuts from the backend when the component loads
         const userLoggedIn = localStorage.getItem('isLoggedIn');
-        if(userLoggedIn !== null) {
+        if (userLoggedIn !== null) {
             setEditingTextEditor(true);
         }
     }, []);
@@ -288,6 +288,27 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         // Immediately update predictions based on the updated current word
         fetchPredictiveText(updatedCurrentWord); // Just fetch, don't set predictions here
     };
+    const onPredictionSelect = (prediction) => {
+        // Function to remove the last word (the current partial word) from a string
+        const removeLastWord = (str) => {
+            let lastIndexOfSpace = str.lastIndexOf(" ");
+            if (lastIndexOfSpace === -1) { // Handle case where there's only one word
+                return "";
+            }
+            return str.substring(0, lastIndexOfSpace);
+        };
+
+        // Update the text with the selected prediction
+        if (editingTextEditor) {
+            // For the text editor, remove the last word and append the selected prediction
+            setTextData(prevTextData => `${removeLastWord(prevTextData)} ${prediction} `);
+        } else if (activeFieldLogin[0]) {
+            setLoginData(prevLoginData => [...prevLoginData.slice(0, 0), `${removeLastWord(prevLoginData[0])} ${prediction} `, ...prevLoginData.slice(1)]);
+        }
+
+        setCurrentWord(''); // Reset the current word to be ready for a new word prediction
+        setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+    }
 
 
     return (
@@ -306,10 +327,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                             onClick={toggleWordBarVisibility}
                         >
                             <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[0] || ''}</p>
+                                <p className="text-white lg:text-lg">{predictions[0]}</p>
                             </div>
                             <div className="h-full w-[21.875%] border-r-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[1] || ''}</p>
+                                <p className="text-white lg:text-lg">{predictions[1]}</p>
                             </div>
                             <div className="w-[12.5%] h-full border-y-2 border-black flex flex-row justify-center items-center font-bold text-black">
                                 <img
@@ -319,10 +340,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 />
                             </div>
                             <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[2] || ''}</p>
+                                <p className="text-white lg:text-lg">{predictions[2]}</p>
                             </div>
                             <div className="h-full w-[21.875%] border-l-2 border-y-2 border-black flex flex-row items-center justify-center">
-                                <p className="text-white lg:text-lg">{predictions[3] || ''}</p>
+                                <p className="text-white lg:text-lg">{predictions[3]}</p>
                             </div>
                         </button>
                     )}
@@ -332,18 +353,14 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                         >
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer flex flex-row items-center justify-center border-r-2 border-black">
                                 <button
-                                    onClick={() => {
-                                        handleKeyClickEnhanced(predictions[0]);
-                                    }}
+                                    onClick={() => onPredictionSelect(predictions[0])}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[0]}</p>
                                 </button>
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-r-2 border-black flex flex-row items-center justify-center">
                                 <button
-                                    onClick={() => {
-                                        handleKeyClickEnhanced(predictions[1]);
-                                    }}
+                                    onClick={() => onPredictionSelect(predictions[1])}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[1]}</p>
                                 </button>
@@ -378,18 +395,14 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
                                 <button
-                                    onClick={() => {
-                                        handleKeyClickEnhanced(predictions[2]);
-                                    }}
+                                    onClick={() => onPredictionSelect(predictions[2])}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[2]}</p>
                                 </button>
                             </div>
                             <div className="h-full w-[21.25%] hover:bg-[#6ab8e9] hover:cursor-pointer border-l-2 border-black flex flex-row items-center justify-center">
                                 <button
-                                    onClick={() => {
-                                        handleKeyClickEnhanced(predictions[3]);
-                                    }}
+                                    onClick={() => onPredictionSelect(predictions[3])}
                                 >
                                     <p className="text-white lg:text-lg">{predictions[3]}</p>
                                 </button>
@@ -1176,4 +1189,4 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 export const toggleKeyboardVisibility = Keyboard.toggleKeyboardVisibility;
 export const isKeyboardOpen = () => Keyboard.visible;
 
-export default Keyboard;    
+export default Keyboard;         
