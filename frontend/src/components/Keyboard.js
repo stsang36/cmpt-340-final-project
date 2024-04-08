@@ -28,6 +28,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     useEffect(() => {
         //loadShortcuts(); // Load shortcuts from the backend when the component loads
+        const userLoggedIn = localStorage.getItem('isLoggedIn');
+        if(userLoggedIn !== null) {
+            setEditingTextEditor(true);
+        }
     }, []);
 
     // Set unknown object's fields to false to make room for the active fields
@@ -238,7 +242,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
     const fetchPredictiveText = async (word) => {
         if (!word) {
-            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+            setPredictions(['type', 'for', 'new', 'predictions']);
             return;
         }
         const token = localStorage.getItem('token');
@@ -252,11 +256,11 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             });
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-            const paddedPredictions = [...data.topWords, 'Word 1', 'Word 2', 'Word 3', 'Word 4'].slice(0, 4);
+            const paddedPredictions = [...data.topWords, 'type', 'for', 'new', 'predictions'].slice(0, 4);
             setPredictions(paddedPredictions);
         } catch (error) {
             console.error("Error fetching predictions:", error.message);
-            setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+            setPredictions(['type', 'for', 'new', 'predictions']);
         }
     };
 
