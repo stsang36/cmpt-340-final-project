@@ -6,28 +6,29 @@ import { useNavigate } from 'react-router-dom';
 
 const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleUsernameChangeLogin, handlePasswordChangeLogin, handleUsernameChangeReg, handlePasswordChangeReg, handleConfirmPasswordChangeReg, activeFieldLogin, activeFieldReg, keyColor, editingTextEditor, setEditingTextEditor }) => {
 
-    const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible or not
-    const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible or not
+    const [mainSuperkeyVisibility, setMainSuperkeyVisibility] = useState(true); // State to track whether all the zoomed out superkeys are visible
+    const [zoomedSuperkeyVisibility, setZoomedSuperkeyVisibility] = useState([false, false, false, false, false, false, false]); // State to track whether each of the zoomed in individual superkeys are visible
     const [wordBarVisibility, setWordBarVisibility] = useState(true); // State to track whether the word predication bar is visible
-    const [numberVisibility, setNumberVisibility] = useState(false); // State to track whether the numpad is visible or not
-    const [symbolVisibility, setSymbolVisibility] = useState([false, false, false, false]); // State to track whether the symbols are visible or not
-    const [capsLock, setCapsLock] = useState(false); // State to track whether caps lock is engaged or not
-    const [shiftState, setShiftState] = useState(false); // State to track whether shift is engaged or not
-    const [loginData, setLoginData] = useState(['', '']);
-    const [regData, setRegData] = useState(['', '', '']);
-    const [textData, setTextData] = useState(['']);
-    const [capsLockColour, setCapsLockColour] = useState('#19A957');
-    const [shiftColour, setShiftColour] = useState('#19A957');
-    const [letterState, setLetterState] = useState(['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']);
+    const [numberVisibility, setNumberVisibility] = useState(false); // State to track whether the zoomed in number selection is visible
+    const [symbolVisibility, setSymbolVisibility] = useState([false, false, false, false]); // State to track whether the zoomed in symbol selections are visible
+    const [capsLock, setCapsLock] = useState(false); // State to track whether the caps lock key is engaged
+    const [shiftState, setShiftState] = useState(false); // State to track whether the shift key is engaged
+    const [loginData, setLoginData] = useState(['', '']); // State to keep track of what is written in the active login text field
+    const [regData, setRegData] = useState(['', '', '']); // State to keep track of what is written in the active register text field
+    const [textData, setTextData] = useState(['']); // State to keep track of what is written in the text editor
+    const [capsLockColour, setCapsLockColour] = useState('#19A957'); // State to supply the colour for the caps lock key
+    const [shiftColour, setShiftColour] = useState('#19A957'); // State to supply the colour for the shift key
+    const [letterState, setLetterState] = useState(['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']); // State to supply the letters for the keys
 
-    if(!activeFieldLogin) {
+    // Set unknown object's fields to false to make room for the active fields
+    if(!activeFieldLogin) { // If the activeFieldLogin object does not exist pre-set it's fields to false
         activeFieldLogin = [false, false];
     } 
-    if (!activeFieldReg) {
+    if (!activeFieldReg) { // If the activeFieldReg object does not exist pre-set it's fields to false
         activeFieldReg = [false, false, false];
     }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Used to navigate through the website
 
     // Function to toggle the visibility of all the zoomed out superkeys
     const toggleMainSuperkeyVisibility = () => {
@@ -46,17 +47,17 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         setWordBarVisibility(!wordBarVisibility);
     };
 
-    // Function to toggle the visibility of the numpad
+    // Function to toggle the visibility of the zoomed in number selection
     const toggleNumberVisibility = () => {
         setNumberVisibility(!numberVisibility);
     };
 
-    // Function to toggle the visibility of the symbols
+    // Function to toggle the visibility of the zoomed in symbol selections
     const toggleSymbolVisibility = (index) => {
-        if (index === 5) {
+        if (index === 5) { // If the index is 5 reset to signify that the symbols are not zoomed in
             const newArray = [false, false, false, false];
             setSymbolVisibility(newArray);
-        } else {
+        } else { // Otherwise zoom in at the specified index
             const newArray = [false, false, false, false];
             newArray[index] = !newArray[index];
             setSymbolVisibility(newArray);
@@ -74,9 +75,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             setLetterState(newLowerCaseLetters);
         }
         if(capsLockColour === '#19A957') {
-            setCapsLockColour('#0F6834')
+            setCapsLockColour('#0F6834') // colour of the caps lock key when it is engaged
         } else {
-            setCapsLockColour('#19A957');
+            setCapsLockColour('#19A957'); // defalt colour of the caps lock key for when it is dis-engaged
         }
     }
 
@@ -84,9 +85,9 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const toggleShift = () => {
         setShiftState(!shiftState);
         if(shiftColour === '#19A957') {
-            setShiftColour('#0F6834')
+            setShiftColour('#0F6834') // colour of the shift key when it is engaged
         } else {
-            setShiftColour('#19A957');
+            setShiftColour('#19A957'); // defalt colour of the shift key for when it is dis-engaged
         }
     }
 
@@ -96,7 +97,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             key = key.toUpperCase(); // if caps lock is engaged then the pressed key must be capitalized
         } else if (shiftState && key !== 'backspace' && key !== '\n') {
             key = key.toUpperCase();
-            toggleShift();
+            toggleShift(); // toggle shift off after capitalizing just the current key
         }
         if (activeFieldLogin) { // If the active field is from the login component
             if(activeFieldLogin[0]) { // If the active field is username from the login component
@@ -119,7 +120,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                 handleChangeFormRegister(key, 2);
             }
         }
-        if (editingTextEditor) {
+        if (editingTextEditor) { // If the active field is the text editor
             if(key === 'backspace') {
                 setTextData(prevTextData => prevTextData.slice(0, -1));
             } else {
@@ -128,6 +129,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         }
     };
 
+    // Function for handling typing in the login form that is displayed inside the keyboard
     const handleChangeFormLogin = (key, index) => {
         setLoginData(prevLoginData => {
           if (key === 'backspace') {
@@ -140,6 +142,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         });
     };
 
+    // Function for handling typing in the register form that is displayed inside the keyboard
     const handleChangeFormRegister = (key, index) => {
         setRegData(prevRegData => {
           if (key === 'backspace') {
@@ -152,6 +155,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         });
     };
 
+    // Function to handle logging the user out
     const handleLogout = async (e) => {
 
         if(isLoggedIn) {
@@ -164,6 +168,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
 
         }
     }
+
     /*
     // Word Prediction
 
@@ -210,7 +215,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     */
 
     return (
-        <div className="z-50  w-full flex flex-col justify-end overflow-y-auto">
+        <div className="z-50 w-full flex flex-col justify-end overflow-y-auto">
 
             {isVisible && (
                 <div>
