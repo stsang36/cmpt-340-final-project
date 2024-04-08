@@ -28,17 +28,11 @@ const App = () => {
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
-    // Retrieve keyboard visibility state from localStorage
-    const storedKeyboardVisible = localStorage.getItem('keyboardVisible');
-    if (storedKeyboardVisible !== null) {
-      setKeyboardVisible(storedKeyboardVisible === 'true');
+    const userLoggedIn = localStorage.getItem('isLoggedIn');
+    if(userLoggedIn !== null) {
+      openKeyboard();
     }
   }, []);
-
-  // Save keyboard visibility state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('keyboardVisible', keyboardVisible);
-  }, [keyboardVisible]);
 
   return (
     <Router>
@@ -91,7 +85,6 @@ const App = () => {
                   </div>
                 </div>
               </section>
-              
             </div>
             
           </>
