@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextEditor from "./Text-Editor";
 import FormFieldEditor from "./Form-Field-Editor";
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,13 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     const [textData, setTextData] = useState(['']); // State to keep track of what is written in the text editor
     const [capsLockColour, setCapsLockColour] = useState('#19A957'); // State to supply the colour for the caps lock key
     const [shiftColour, setShiftColour] = useState('#19A957'); // State to supply the colour for the shift key
+    const [shortcutsVisible, setShortcutsVisible] = useState(false); // State to track whether the saved shortcuts are visible
     const [letterState, setLetterState] = useState(['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']); // State to supply the letters for the keys
+    const [shortcutData, setShortcutData] = useState(['','','','','']); // State to store the 5 shortcuts that are loaded from the backend
+
+    useEffect(() => {
+        //loadShortcuts(); // Load shortcuts from the backend when the component loads
+    }, []);
 
     // Set unknown object's fields to false to make room for the active fields
     if(!activeFieldLogin) { // If the activeFieldLogin object does not exist pre-set it's fields to false
@@ -81,7 +87,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         }
     }
 
-    // Function to toggle the caps lock on and off
+    // Function to toggle shift on and off
     const toggleShift = () => {
         setShiftState(!shiftState);
         if(shiftColour === '#19A957') {
@@ -89,6 +95,10 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         } else {
             setShiftColour('#19A957'); // defalt colour of the shift key for when it is dis-engaged
         }
+    }
+
+    const toggleShortcuts = () => {
+        setShortcutsVisible(!shortcutsVisible);
     }
 
     // Function to handle the clicking of any key on the keyboard
@@ -539,7 +549,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                 <div className="mr-[19px] md:mr-[28.5px] lg:mr-[47.5px]">
                                     <button
                                         type="button"
-                                        className="h-14 bg-[#22D26D] hover:bg-[#2AF980] flex flex-row items-center rounded-t-md sm:h-[72px] lg:h-[85px]"
+                                        className="h-14 bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[72px] lg:h-[85px]"
                                         onClick={() => {
                                             toggleMainSuperkeyVisibility();
                                             toggleZoomedSuperkeyVisibility(3);
@@ -565,9 +575,39 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-t-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"><img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon" /></button>
+                                        <button 
+                                            className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]"
+                                            onClick={() => {
+                                                toggleZoomedSuperkeyVisibility(3); // Toggle desired superkey off
+                                                toggleShortcuts();
+                                            }}
+                                        >
+                                            <img className="object-cover w-[33px] h-[36px] lg:w-[45px] lg:h-[51px]" src="../assets/images/png/shortcut-icon.png" alt="shortcut icon"/>
+                                        </button>
                                     </div>
                                 </div>
+                            )}
+                            {shortcutsVisible && (
+                                <div className="flex flex-col items-center">
+                                    <button
+                                        type="button"
+                                        className="w-[200px] mb-[32.5px] h-[80px] bg-[#19A957] hover:bg-[#2AF980] text-white rounded-md sm:h-[90px] md:h-[110px] md:w-[250px] lg:h-[140px] lg:w-[350px]"
+                                        onClick={() => {
+                                            toggleShortcuts();
+                                            toggleZoomedSuperkeyVisibility(3); // Toggle desired superkey on
+                                        }}
+                                    >
+                                        Close Shortcuts
+                                    </button>
+
+                                <div
+                                    className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-md sm:h-[108px] lg:h-[127.5px]"
+                                >
+                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S1</button>
+                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S2</button>
+                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S3</button>
+                                </div>
+                            </div>
                             )}
 
                             {mainSuperkeyVisibility && (
@@ -834,9 +874,17 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                     <div
                                         className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-tl-none rounded-tr-md rounded-bl-md rounded-br-md sm:h-[108px] lg:h-[127.5px]"
                                     >
-                                        <button onClick={() => toggleCapsLock()} disabled={shiftState} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]" style={{ backgroundColor: capsLockColour }}><img className="object-cover w-[25px] h-[25px] lg:w-[50px] lg:h-[50px]" src="../assets/images/png/capslock-icon.png" alt="capslock icon" /></button>
-                                        <button onClick={() => toggleShift()} disabled={capsLock} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]" style={{ backgroundColor: shiftColour }}><img className="object-cover w-[33px] h-[28px] lg:w-[62px] lg:h-[53px]" src="../assets/images/png/shift-icon.png" alt="shift icon" /></button>
+                                        <button onClick={() => toggleCapsLock()} disabled={shiftState} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]" style={{ backgroundColor: capsLockColour }}><img className="object-cover w-[25px] h-[25px] lg:w-[50px] lg:h-[50px]" src="../assets/images/png/capslock-icon.png" alt="capslock icon" /></button>
+                                        <button onClick={() => toggleShift()} disabled={capsLock} className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]" style={{ backgroundColor: shiftColour }}><img className="object-cover w-[33px] h-[28px] lg:w-[62px] lg:h-[53px]" src="../assets/images/png/shift-icon.png" alt="shift icon" /></button>
                                     </div>
+                                </div>
+                            )}
+                            {shortcutsVisible && (
+                                <div
+                                    className="h-[84px] bg-[#22D26D] flex flex-row items-center rounded-b-md sm:h-[108px] lg:h-[127.5px]"
+                                >
+                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S4</button>
+                                    <button className="w-[45px] h-[72px] mx-1 rounded-md flex flex-row justify-center items-center font-bold text-white bg-[#19A957] hover:bg-[#2AF980] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px]">S5</button>
                                 </div>
                             )}
 
