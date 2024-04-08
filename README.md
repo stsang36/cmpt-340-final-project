@@ -16,7 +16,7 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 
 2. [Installation](#installation)
 
-3. [Reproducing this project](#repro)
+3. [Start Application](#repro)
 
 4. [Guidance](#guide)
 
@@ -26,41 +26,39 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 
 ### What to find where
 
-Explain briefly what files are found where
-
 ```bash
 repository
-├── backend
-│   ├── authentication
+├── backend // Backend system
+│   ├── authentication // Where user profiles are handled
 │   │   └── migrations
 │   ├── backend
-│   ├── predictive_text
-│   │   ├── datasets
+│   ├── predictive_text // Where the predictive text is handled
+│   │   ├── datasets // Our dataset used for text prediction
 │   │   └── migrations
-│   ├── textHandler
+│   ├── textHandler // Where files can be handled on stored on the backend database, currently unused. 
 │   │   └── migrations
-│   └── userpreferences
+│   └── userpreferences // Handle simple user preferences call, can reset, edit or add new user settings.
 │       └── migrations
-└── frontend
-    ├── public
-    │   └── assets
+└── frontend // What you see
+    ├── public 
+    │   └── assets // Images used to decorate the site icons, etc.
     │       └── images
     │           ├── png
     │           ├── shapes
     │           └── svg
     └── src
-        ├── components
+        ├── components // components such keyboard functionality 
         ├── css
-        ├── fonts
+        ├── fonts // font used 
         │   └── poppins
-        └── views
+        └── views // each page on the site
 ```
 
 <a name="installation"></a>
 
 ## 2. Installation
 
-To install, make sure to have Python, and Node JS installed onto the machine and run the following commands:
+To install, make sure to have Python, and Node JS installed onto the machine and run the following commands (Each section assumes you are in the root directory of this repository):
 
 ```bash
 git clone $THISREPO
