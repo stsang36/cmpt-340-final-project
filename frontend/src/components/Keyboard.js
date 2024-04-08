@@ -1008,8 +1008,8 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
                                         >
                                             ←
                                         </button>
-                                        <button onClick={() => handleKeyClickEnhanced(';')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>&</button>
-                                        <button onClick={() => handleKeyClickEnhanced(':')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>*</button>
+                                        <button onClick={() => handleKeyClickEnhanced(';')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>;</button>
+                                        <button onClick={() => handleKeyClickEnhanced(':')} className="w-[45px] h-[72px] mr-1 rounded-md flex flex-row justify-center items-center font-bold text-black bg-[#E3E3E3] hover:bg-[#BCBCBC] sm:h-[96px] md:w-[67.5px] lg:w-[112.5px] lg:h-[112.5px] lg:text-2xl" style={{ backgroundColor: keyColor }}>:</button>
                                         <button onClick={() => {
                                             toggleSymbolVisibility(3);
                                         }}
