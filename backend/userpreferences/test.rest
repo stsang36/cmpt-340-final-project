@@ -110,7 +110,10 @@ POST http://127.0.0.1:8000/api/updateShortcutKeys/
 Content-Type: application/json
 Authorization: Token a97c75dcce54b4c05c0e12a149f3f691cf31f302
 
-{"shortcut_keys": ["ctrl", "shift", "a"]}
+{"shortcut_keys": {
+    "buttonTest": "This is a phrase"
+    }
+}
 
 ###
 
