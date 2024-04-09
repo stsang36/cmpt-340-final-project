@@ -239,15 +239,19 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
     }
 
     // Word Prediction
-
-    const fetchPredictiveText = async (word) => {
+    const fetchPredictiveText = async (word, isFullWord = false) => {
         if (!word) {
             setPredictions(['', '', '', '']);
             return;
         }
         const token = localStorage.getItem('token');
+        let url = `http://127.0.0.1:8000/api/fetchAutoComplete?unfinished_word=${word}`;
+        if (isFullWord) {
+            // Use fetchNextWordPrediction endpoint when the full word is provided for prediction
+            url = `http://127.0.0.1:8000/api/fetchNextWordPrediction?prefix_word=${word}`;
+        }
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/fetchAutoComplete?unfinished_word=${word}`, {
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -256,7 +260,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
             });
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-            const paddedPredictions = [...data.topWords, '', '', '', ''].slice(0, 4);
+            const paddedPredictions = isFullWord ? data.prediction : [...data.topWords, '', '', '', ''].slice(0, 4);
             setPredictions(paddedPredictions);
         } catch (error) {
             console.error("Error fetching predictions:", error.message);
@@ -288,6 +292,7 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         // Immediately update predictions based on the updated current word
         fetchPredictiveText(updatedCurrentWord); // Just fetch, don't set predictions here
     };
+
     const onPredictionSelect = (prediction) => {
         // Function to remove the last word (the current partial word) from a string
         const removeLastWord = (str) => {
@@ -302,12 +307,20 @@ const Keyboard = ({ isLoggedIn, setIsLoggedIn, isVisible, closeKeyboard, handleU
         if (editingTextEditor) {
             // For the text editor, remove the last word and append the selected prediction
             setTextData(prevTextData => `${removeLastWord(prevTextData)} ${prediction} `);
+            // Fetch further predictions based on the full selected word
+            fetchPredictiveText(prediction, true); // Pass true to indicate a full word prediction request
         } else if (activeFieldLogin[0]) {
-            setLoginData(prevLoginData => [...prevLoginData.slice(0, 0), `${removeLastWord(prevLoginData[0])} ${prediction} `, ...prevLoginData.slice(1)]);
+            // Assuming the first element in loginData array is username, update it with prediction
+            setLoginData(prevLoginData => {
+                const updatedLoginData = [...prevLoginData];
+                updatedLoginData[0] = `${removeLastWord(prevLoginData[0])} ${prediction} `;
+                return updatedLoginData;
+            });
         }
 
         setCurrentWord(''); // Reset the current word to be ready for a new word prediction
-        setPredictions(['Word 1', 'Word 2', 'Word 3', 'Word 4']);
+        setPredictions(['', '', '', '']);
+        setWordBarVisibility(true);
     }
 
 
